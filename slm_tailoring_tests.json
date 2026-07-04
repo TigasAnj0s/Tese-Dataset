@@ -1,0 +1,990 @@
+{
+    "name": "Cybersecurity Maturity Tailoring — SLM Evaluation Test Suite",
+    "version": "1.0.0",
+    "domain_ref": "DOM-CS v1.0.0",
+    "question_bank_ref": "cybersecurity_assessment_questions.json v1.0.0",
+    "description": "A set of seven test cases covering representative organizational archetypes and one adversarial stress case, for evaluating the SLM-automated configurational-tailoring system. Each case specifies (i) Tier-1 OCM answers, (ii) the expected Tier-2 question subset the SLM should select per capability, (iii) scripted Tier-2 responses, (iv) expected Tier-3 (CLR) activations, and (v) an expected maturity-profile summary. Metrics: CPS, ExecRate, valid@1, escalation rate.",
+    "evaluation_protocol": {
+        "per_case_metrics": [
+            "tier2_selection_F1 (per capability, against expected_tier2_selection)",
+            "clr_recall (expected CLR fired)",
+            "clr_precision (CLR firings not in expected set)",
+            "valid@1 (schema-validated JSON maturity profile on first attempt)",
+            "CPS (Capability Profile Similarity vs. expected_maturity_profile_summary)",
+            "ExecRate (tool-call success rate during tailoring pipeline)",
+            "escalation_rate (fraction of decisions escalated to LLM fallback)"
+        ],
+        "aggregate_metrics": [
+            "macro-averaged F1 across cases for tier2_selection",
+            "macro-averaged CLR F1",
+            "weighted CPS (weighted by capability count where active)"
+        ]
+    },
+    "tests": [
+        {
+            "id": "TC-01",
+            "title": "European Telecommunications Operator",
+            "archetype": "Critical-infrastructure incumbent, multi-team, NIS2/DORA-regulated",
+            "narrative": "A tier-1 European telecommunications operator with ~14 development teams distributed across fixed-line, mobile core, and digital services business units. Central security governance with team-level champions. Hybrid on-prem/cloud estate. Handles PII extensively (subscriber data, call detail records). Significant reliance on network-equipment vendors and managed-service providers.",
+            "ocm_answers": {
+                "OCM-01": "Moderate",
+                "OCM-02": "High",
+                "OCM-03": "Risk-Averse",
+                "OCM-04": [
+                    "NIS2",
+                    "ISO/IEC 27001",
+                    "GDPR",
+                    "Sector-specific regulation"
+                ],
+                "OCM-05": "Integrated",
+                "OCM-06": "Multiple teams with centralized governance",
+                "OCM-07": "Significant reliance on external providers",
+                "OCM-08": "Yes, extensively",
+                "OCM-09": "Hybrid (on-premise and cloud)",
+                "OCM-10": "Proficient in core security practices"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-02",
+                    "CMD-GOV-03",
+                    "CMD-GOV-04",
+                    "CMD-GOV-05",
+                    "CMD-GOV-06",
+                    "CMD-GOV-07"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-02",
+                    "CMD-RISK-03",
+                    "CMD-RISK-04"
+                ],
+                "CAP-CS-REQ": [
+                    "CMD-REQ-01",
+                    "CMD-REQ-02"
+                ],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01",
+                    "CMD-TECH-02"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [
+                    "CMD-PTEST-01"
+                ],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-02",
+                    "CMD-OPSEC-03",
+                    "CMD-OPSEC-04"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02",
+                    "CMD-CFGM-03"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01",
+                    "CMD-QADSO-02"
+                ],
+                "CAP-CS-CD": [
+                    "CMD-CD-01"
+                ]
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "Organization-wide enforced policy",
+                "CMD-GOV-02": "Basic periodic review",
+                "CMD-GOV-03": "Organizational SAT plan including executives",
+                "CMD-GOV-04": "Organization defines mandatory/optional SDLC security practices",
+                "CMD-GOV-05": "Organizational Security CoC with team satellites",
+                "CMD-GOV-06": "Organizational metrics catalog with per-team analysis",
+                "CMD-GOV-07": "Organizational compliance catalog with SDLC translation",
+                "CMD-RISK-01": "Organizational risk strategy with application classification",
+                "CMD-RISK-02": "Formal security write-off required",
+                "CMD-RISK-03": "Organizational catalog with attack patterns",
+                "CMD-RISK-04": "Organizational enforcement with periodic evaluation",
+                "CMD-REQ-01": "Organizational enforcement with cross-product integration",
+                "CMD-REQ-02": "Organizational inventory with technology alternatives and objectives",
+                "CMD-TECH-01": "Organizational mandatory inventory enforced",
+                "CMD-TECH-02": "Organizational SCA rules and enforced tool usage",
+                "CMD-STEST-01": "Organizational strategies shared across teams",
+                "CMD-STEST-02": "Risk-driven tests with coverage analysis",
+                "CMD-PTEST-01": "Mandatory organizational penetration testing program",
+                "CMD-OPSEC-01": "Organizational configurations enforced",
+                "CMD-OPSEC-02": "Application behavior monitoring",
+                "CMD-OPSEC-03": "Incident exchange with response team, bugs created",
+                "CMD-OPSEC-04": "Organizational response team with mandatory training",
+                "CMD-CFGM-01": "Organizational inventory with integrity testing",
+                "CMD-CFGM-02": "Organizational SBOM definition, majority of products covered",
+                "CMD-CFGM-03": "Organizational rules, centralized branching, metrics",
+                "CMD-CI-01": "Organizational CI with quality-metric control gates",
+                "CMD-QADSO-01": "Organizational pipeline integration with automation",
+                "CMD-QADSO-02": "Organizational strategy with quality metrics enforced",
+                "CMD-CD-01": "Automated restore with data loss prevention"
+            },
+            "expected_clr_triggers": [],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 3,
+                "target_scope": 3,
+                "target_knowledge": 3,
+                "target_management": 3,
+                "activated_by_ocm": [
+                    "PRA-CS-GOV-07",
+                    "PRA-CS-GOV-08",
+                    "PRA-CS-REQ-01",
+                    "PRA-CS-RISK-01",
+                    "PRA-CS-RISK-03",
+                    "PRA-CS-CFGM-02",
+                    "PRA-CS-CI-03",
+                    "PRA-CS-OPSEC-01",
+                    "PRA-CS-OPSEC-03",
+                    "PRA-CS-OPSEC-04"
+                ],
+                "expected_practice_level_mode": 3,
+                "commentary": "NIS2 and DORA-adjacent obligations force mandatory activation of compliance-floor practices. Proficient knowledge and integrated SDLC make Level 3 feasible; Level 4 targeted only for core-critical capabilities (OPSEC monitoring, RISK assessment)."
+            }
+        },
+        {
+            "id": "TC-02",
+            "title": "EU Fintech Scale-up (payments)",
+            "archetype": "Cloud-native, high-velocity, DORA/PCI-DSS/GDPR-regulated",
+            "narrative": "A 200-engineer fintech scale-up operating a card-issuing and payment-initiation platform. SaaS/multi-tenant deployment on a public cloud. Moderate-to-high business volatility (quarterly feature pivots), multi-team with some central coordination. Teams are highly autonomous over their own pipelines but share a platform-engineering group. PII is pervasive; external providers used for KYC and fraud scoring.",
+            "ocm_answers": {
+                "OCM-01": "High",
+                "OCM-02": "High",
+                "OCM-03": "Balanced",
+                "OCM-04": [
+                    "DORA",
+                    "PCI-DSS",
+                    "GDPR",
+                    "ISO/IEC 27001"
+                ],
+                "OCM-05": "Formal",
+                "OCM-06": "Multiple teams with some central coordination",
+                "OCM-07": "Some outsourcing but mostly internal",
+                "OCM-08": "Yes, extensively",
+                "OCM-09": "Cloud-native",
+                "OCM-10": "Proficient in core security practices"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-02",
+                    "CMD-GOV-03",
+                    "CMD-GOV-04",
+                    "CMD-GOV-05",
+                    "CMD-GOV-06",
+                    "CMD-GOV-07"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-02",
+                    "CMD-RISK-03",
+                    "CMD-RISK-04"
+                ],
+                "CAP-CS-REQ": [
+                    "CMD-REQ-01",
+                    "CMD-REQ-02"
+                ],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01",
+                    "CMD-TECH-02"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [
+                    "CMD-PTEST-01"
+                ],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-02",
+                    "CMD-OPSEC-03",
+                    "CMD-OPSEC-04"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02",
+                    "CMD-CFGM-03"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01",
+                    "CMD-QADSO-02"
+                ],
+                "CAP-CS-CD": [
+                    "CMD-CD-01"
+                ]
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "Documented team process",
+                "CMD-GOV-02": "Data-driven continuous adjustment",
+                "CMD-GOV-03": "Planned SAT with team-specific training needs",
+                "CMD-GOV-04": "Team-level goals and practices defined for SDLC",
+                "CMD-GOV-05": "Team-designated security members",
+                "CMD-GOV-06": "Team-defined metrics with known definitions",
+                "CMD-GOV-07": "Organizational compliance catalog with SDLC translation",
+                "CMD-RISK-01": "Team-level risk identification and tasks",
+                "CMD-RISK-02": "Formal security write-off required",
+                "CMD-RISK-03": "Team-level product vulnerability identification",
+                "CMD-RISK-04": "Per-project threat assessment and abuse cases",
+                "CMD-REQ-01": "Organizational enforcement with cross-product integration",
+                "CMD-REQ-02": "Team-level definitions of required features",
+                "CMD-TECH-01": "Team-level internal definitions",
+                "CMD-TECH-02": "Organizational SCA rules and enforced tool usage",
+                "CMD-STEST-01": "Team-defined strategy traced to requirements",
+                "CMD-STEST-02": "Automated tests in pipeline",
+                "CMD-PTEST-01": "External tests and tools used",
+                "CMD-OPSEC-01": "Automated security configurations",
+                "CMD-OPSEC-02": "Application and infrastructure monitoring",
+                "CMD-OPSEC-03": "Defined detection and treatment process",
+                "CMD-OPSEC-04": "Trained individuals within the team",
+                "CMD-CFGM-01": "Team-level full asset inventory",
+                "CMD-CFGM-02": "Automated SBOM per product",
+                "CMD-CFGM-03": "Repository with branching strategy",
+                "CMD-CI-01": "Automated CI with goal-oriented orchestration",
+                "CMD-QADSO-01": "Team-defined rules for tool usage",
+                "CMD-QADSO-02": "Team strategy with goals and manually collected metrics",
+                "CMD-CD-01": "Automated restore with data loss prevention"
+            },
+            "expected_clr_triggers": [],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 2,
+                "target_scope": 2,
+                "target_knowledge": 2,
+                "target_management": 2,
+                "regulatory_floor_overrides_to_level": 3,
+                "activated_by_ocm": [
+                    "PRA-CS-GOV-07",
+                    "PRA-CS-GOV-08",
+                    "PRA-CS-REQ-01",
+                    "PRA-CS-RISK-01",
+                    "PRA-CS-RISK-03",
+                    "PRA-CS-CFGM-02",
+                    "PRA-CS-CI-03",
+                    "PRA-CS-OPSEC-01",
+                    "PRA-CS-OPSEC-03",
+                    "PRA-CS-OPSEC-04"
+                ],
+                "commentary": "Hybrid maturity: team-centric practice baseline (L2) but regulatory floor pushes compliance-adjacent practices (GOV-08, REQ-01, RISK-01) to L3. CLR-03 resolves the write-off/risk-framework mismatch by capping RISK-02 unless clarified."
+            }
+        },
+        {
+            "id": "TC-03",
+            "title": "Healthcare SaaS Start-up",
+            "archetype": "Single team, HIPAA-equivalent context, low maturity baseline",
+            "narrative": "A 15-person healthcare SaaS providing appointment management and patient-record digitization to small clinics. One development team, no dedicated security staff. PII extensively processed. Cloud-native. Engineers have limited security experience; management recognizes cybersecurity as a business-enabling concern but has not invested systematically. This case stresses the system on the low-maturity end and is expected to trigger several CLR patterns if the team overclaims.",
+            "ocm_answers": {
+                "OCM-01": "High",
+                "OCM-02": "High",
+                "OCM-03": "Risk-Averse",
+                "OCM-04": [
+                    "GDPR",
+                    "Sector-specific regulation"
+                ],
+                "OCM-05": "Undefined",
+                "OCM-06": "Single team or very small organization",
+                "OCM-07": "No external providers",
+                "OCM-08": "Yes, extensively",
+                "OCM-09": "Cloud-native",
+                "OCM-10": "Minimal awareness"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-03",
+                    "CMD-GOV-07"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-04"
+                ],
+                "CAP-CS-REQ": [
+                    "CMD-REQ-01",
+                    "CMD-REQ-02"
+                ],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01",
+                    "CMD-TECH-02"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-02",
+                    "CMD-OPSEC-03"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02",
+                    "CMD-CFGM-03"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01",
+                    "CMD-QADSO-02"
+                ],
+                "CAP-CS-CD": [
+                    "CMD-CD-01"
+                ]
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "Informal/team-level agreements",
+                "CMD-GOV-03": "No training exists",
+                "CMD-GOV-07": "Compliance not considered",
+                "CMD-RISK-01": "Risks identified but not properly handled",
+                "CMD-RISK-04": "No threat analysis",
+                "CMD-REQ-01": "Isolated requirements in some systems",
+                "CMD-REQ-02": "Some teams align on technology for some features",
+                "CMD-TECH-01": "Not addressed",
+                "CMD-TECH-02": "Composition not explicit",
+                "CMD-STEST-01": "No security testing",
+                "CMD-STEST-02": "Automated tests in pipeline",
+                "CMD-OPSEC-01": "Basic host/network security",
+                "CMD-OPSEC-02": "Basic CPU/memory metrics",
+                "CMD-OPSEC-03": "Registered as bugs and fixed",
+                "CMD-CFGM-01": "External dependencies managed",
+                "CMD-CFGM-02": "Dependencies managed but no SBOM",
+                "CMD-CFGM-03": "Internal code in repository",
+                "CMD-CI-01": "CI exists, manually triggered",
+                "CMD-QADSO-01": "Ad-hoc individual usage",
+                "CMD-QADSO-02": "Individual contributors decide coverage",
+                "CMD-CD-01": "Manual restore by specific people, probable data loss"
+            },
+            "expected_clr_triggers": [
+                {
+                    "id": "CLR-04",
+                    "reason": "STEST-02 scripted at L2 (automated tests) but STEST-01 at L0-1 (no strategy). Tests CLR-04 pathway."
+                }
+            ],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 1,
+                "target_scope": 1,
+                "target_knowledge": 1,
+                "target_management": 1,
+                "regulatory_floor_overrides_to_level": 2,
+                "activated_by_ocm": [
+                    "PRA-CS-GOV-07",
+                    "PRA-CS-GOV-08",
+                    "PRA-CS-REQ-01",
+                    "PRA-CS-RISK-01",
+                    "PRA-CS-OPSEC-01",
+                    "PRA-CS-OPSEC-03",
+                    "PRA-CS-OPSEC-04"
+                ],
+                "commentary": "System should cap organizational-scope practices at Level 2 (SDLC undefined) unless CLR-09 is triggered and resolved. Knowledge-dimension baseline enforces Level 1 on practices whose Level-3 descriptor requires proficient knowledge, unless CLR-10 reveals a specialized subset."
+            }
+        },
+        {
+            "id": "TC-04",
+            "title": "Systems Integrator with Outsourced Delivery",
+            "archetype": "Multi-team high-autonomy, primarily outsourced development",
+            "narrative": "A mid-sized IT consultancy delivering custom software for public-sector clients. The in-house organization (~60 staff) coordinates requirements, architecture, and acceptance; ~80% of coding and operations are subcontracted to offshore partners. Moderate regulatory exposure (per-project), on-premise deployment at client sites. Tests supply-chain practice activation (OCM-07 = 'Primarily outsourced').",
+            "ocm_answers": {
+                "OCM-01": "Moderate",
+                "OCM-02": "Medium",
+                "OCM-03": "Balanced",
+                "OCM-04": [
+                    "ISO/IEC 27001",
+                    "GDPR"
+                ],
+                "OCM-05": "Basic",
+                "OCM-06": "Multiple teams with high autonomy",
+                "OCM-07": "Primarily outsourced development/infrastructure",
+                "OCM-08": "Yes, limited scope",
+                "OCM-09": "On-premise only",
+                "OCM-10": "Basic awareness but limited hands-on experience"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-03",
+                    "CMD-GOV-05",
+                    "CMD-GOV-07"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-01",
+                    "CMD-RISK-04"
+                ],
+                "CAP-CS-REQ": [
+                    "CMD-REQ-01",
+                    "CMD-REQ-02"
+                ],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01",
+                    "CMD-TECH-02"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [
+                    "CMD-PTEST-01"
+                ],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-02",
+                    "CMD-OPSEC-03",
+                    "CMD-OPSEC-04"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02",
+                    "CMD-CFGM-03"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01",
+                    "CMD-QADSO-02"
+                ],
+                "CAP-CS-CD": [
+                    "CMD-CD-01"
+                ]
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "Documented team process",
+                "CMD-GOV-03": "Ad-hoc Security Awareness Training identified by teams",
+                "CMD-GOV-05": "Some individuals are informally recognized",
+                "CMD-GOV-07": "Team identifies obligations and tasks",
+                "CMD-RISK-01": "Team-level risk identification and tasks",
+                "CMD-RISK-04": "Ad-hoc community-based analysis",
+                "CMD-REQ-01": "Teams identify and translate per-product regulatory needs",
+                "CMD-REQ-02": "Team-level definitions of required features",
+                "CMD-TECH-01": "Team-level internal definitions",
+                "CMD-TECH-02": "Team manages dependencies, no vulnerability analysis",
+                "CMD-STEST-01": "Team-defined strategy traced to requirements",
+                "CMD-STEST-02": "Opaque-box techniques only",
+                "CMD-PTEST-01": "External tests and tools used",
+                "CMD-OPSEC-01": "Basic host/network security",
+                "CMD-OPSEC-02": "No monitoring",
+                "CMD-OPSEC-03": "Defined detection and treatment process",
+                "CMD-OPSEC-04": "Ad-hoc response by available team members",
+                "CMD-CFGM-01": "Team-level full asset inventory",
+                "CMD-CFGM-02": "Dependencies managed but no SBOM",
+                "CMD-CFGM-03": "Repository with branching strategy",
+                "CMD-CI-01": "CI exists, manually triggered",
+                "CMD-QADSO-01": "Team-defined rules for tool usage",
+                "CMD-QADSO-02": "Team strategy with goals and manually collected metrics",
+                "CMD-CD-01": "Manual restore, no specific team member needed"
+            },
+            "expected_clr_triggers": [
+                {
+                    "id": "CLR-05",
+                    "reason": "OPSEC-03 L2 (defined detection/treatment) inferred for PRA-CS-OPSEC-05, but OPSEC-02 L2 only covers app/infra monitoring, not full behaviour monitoring required for the upper level. Borderline; trigger depends on SLM's inference rule for OPSEC-05 from OPSEC-03."
+                },
+                {
+                    "id": "CLR-06",
+                    "reason": "OPSEC-03 L2 (defined response process) vs OPSEC-04 L1 (ad-hoc team): OPSEC-07 inferred L2 but OPSEC-06 at L1 → CLR-06 fires."
+                }
+            ],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 2,
+                "target_scope": 2,
+                "target_knowledge": 1,
+                "target_management": 2,
+                "activated_by_ocm": [
+                    "PRA-CS-GOV-07",
+                    "PRA-CS-GOV-08",
+                    "PRA-CS-REQ-01",
+                    "PRA-CS-RISK-01",
+                    "PRA-CS-RISK-03",
+                    "PRA-CS-CFGM-02",
+                    "PRA-CS-CI-03",
+                    "PRA-CS-OPSEC-01",
+                    "PRA-CS-OPSEC-04"
+                ],
+                "commentary": "Supply-chain practices (RISK-03, CFGM-02, CI-03) activated with L2+ targets despite modest overall maturity because OCM-07 signals primary outsourcing. Knowledge dimension capped at L1 per OCM-10; CLR-10 may be triggered if any CMD suggests proficient knowledge."
+            },
+            "scripted_inferred_levels": {
+                "PRA-CS-OPSEC-07": 2
+            }
+        },
+        {
+            "id": "TC-05",
+            "title": "Developer-Tools Cloud-native Startup",
+            "archetype": "Small, high-velocity, low-regulation, moderate knowledge",
+            "narrative": "A ~40-person venture-backed startup building a developer-productivity SaaS. Two product teams, one platform team, no dedicated security officer. No PII-sensitive workloads (corporate tooling only). Security matters for customer trust but no hard regulatory obligations. Tests the system's behaviour under 'no regulatory floor' (OCM-04='None').",
+            "ocm_answers": {
+                "OCM-01": "High",
+                "OCM-02": "Medium",
+                "OCM-03": "Risk-Tolerant",
+                "OCM-04": [
+                    "None explicitly identified"
+                ],
+                "OCM-05": "Basic",
+                "OCM-06": "Multiple teams with some central coordination",
+                "OCM-07": "Some outsourcing but mostly internal",
+                "OCM-08": "No",
+                "OCM-09": "Cloud-native",
+                "OCM-10": "Basic awareness but limited hands-on experience"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-03",
+                    "CMD-GOV-04"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-04"
+                ],
+                "CAP-CS-REQ": [
+                    "CMD-REQ-02"
+                ],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01",
+                    "CMD-TECH-02"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-02",
+                    "CMD-OPSEC-03"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02",
+                    "CMD-CFGM-03"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01",
+                    "CMD-QADSO-02"
+                ],
+                "CAP-CS-CD": [
+                    "CMD-CD-01"
+                ]
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "Informal/team-level agreements",
+                "CMD-GOV-03": "Informal awareness events",
+                "CMD-GOV-04": "Some goals identified",
+                "CMD-RISK-01": "Risks identified but not properly handled",
+                "CMD-RISK-04": "Ad-hoc community-based analysis",
+                "CMD-REQ-02": "Some teams align on technology for some features",
+                "CMD-TECH-01": "Case-by-case approach",
+                "CMD-TECH-02": "External dependencies managed, no integrity check",
+                "CMD-STEST-01": "Testing without process or goals",
+                "CMD-STEST-02": "Automated tests in pipeline",
+                "CMD-OPSEC-01": "Automated security configurations",
+                "CMD-OPSEC-02": "Application and infrastructure monitoring",
+                "CMD-OPSEC-03": "Registered as bugs and fixed",
+                "CMD-CFGM-01": "Team-level full asset inventory",
+                "CMD-CFGM-02": "Automated SBOM per product",
+                "CMD-CFGM-03": "Repository with branching strategy",
+                "CMD-CI-01": "Automated CI with goal-oriented orchestration",
+                "CMD-QADSO-01": "Team-defined rules for tool usage",
+                "CMD-QADSO-02": "Individual contributors decide coverage",
+                "CMD-CD-01": "Automated restore with data loss prevention"
+            },
+            "expected_clr_triggers": [
+                {
+                    "id": "CLR-04",
+                    "reason": "STEST-02 L2 scripted but STEST-01 L1 ('testing without process'). CLR-04 should fire."
+                }
+            ],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 2,
+                "target_scope": 2,
+                "target_knowledge": 1,
+                "target_management": 2,
+                "regulatory_floor_overrides_to_level": null,
+                "activated_by_ocm": [
+                    "PRA-CS-OPSEC-01",
+                    "PRA-CS-OPSEC-03",
+                    "PRA-CS-OPSEC-04",
+                    "PRA-CS-CFGM-02",
+                    "PRA-CS-CI-03"
+                ],
+                "commentary": "Absence of regulatory floor and no PII leaves the tailoring free to follow the team's declared baseline. This case is the control for tests exercising OCM-04 and OCM-08 activation logic."
+            }
+        },
+        {
+            "id": "TC-06",
+            "title": "National Public-Sector Agency",
+            "archetype": "Multi-team centralized governance, broad regulatory surface, low volatility",
+            "narrative": "A national social-security agency with ~8 development teams and a central IT-security unit. Strongly risk-averse, moderate-to-low business volatility, and subject to multiple overlapping regulatory obligations including NIS2 and national sector rules. Hybrid estate. Teams have mixed knowledge levels but security is a priority. Useful for stressing the activation of multiple compliance floors and the governance-heavy end of the tailoring behaviour.",
+            "ocm_answers": {
+                "OCM-01": "Low",
+                "OCM-02": "High",
+                "OCM-03": "Risk-Averse",
+                "OCM-04": [
+                    "NIS2",
+                    "GDPR",
+                    "ISO/IEC 27001",
+                    "Sector-specific regulation"
+                ],
+                "OCM-05": "Formal",
+                "OCM-06": "Multiple teams with centralized governance",
+                "OCM-07": "Some outsourcing but mostly internal",
+                "OCM-08": "Yes, extensively",
+                "OCM-09": "Hybrid (on-premise and cloud)",
+                "OCM-10": "Basic awareness but limited hands-on experience"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-02",
+                    "CMD-GOV-03",
+                    "CMD-GOV-04",
+                    "CMD-GOV-05",
+                    "CMD-GOV-06",
+                    "CMD-GOV-07"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-02",
+                    "CMD-RISK-03",
+                    "CMD-RISK-04"
+                ],
+                "CAP-CS-REQ": [
+                    "CMD-REQ-01",
+                    "CMD-REQ-02"
+                ],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01",
+                    "CMD-TECH-02"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [
+                    "CMD-PTEST-01"
+                ],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-02",
+                    "CMD-OPSEC-03",
+                    "CMD-OPSEC-04"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02",
+                    "CMD-CFGM-03"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01",
+                    "CMD-QADSO-02"
+                ],
+                "CAP-CS-CD": [
+                    "CMD-CD-01"
+                ]
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "Organization-wide enforced policy",
+                "CMD-GOV-02": "Basic periodic review",
+                "CMD-GOV-03": "Organizational SAT plan including executives",
+                "CMD-GOV-04": "Organization defines mandatory/optional SDLC security practices",
+                "CMD-GOV-05": "Team-designated security members",
+                "CMD-GOV-06": "Organizational metrics catalog with per-team analysis",
+                "CMD-GOV-07": "Organizational compliance catalog with SDLC translation",
+                "CMD-RISK-01": "Organizational risk strategy with application classification",
+                "CMD-RISK-02": "Formal security write-off required",
+                "CMD-RISK-03": "Team-level product vulnerability identification",
+                "CMD-RISK-04": "Per-project threat assessment and abuse cases",
+                "CMD-REQ-01": "Organizational enforcement with cross-product integration",
+                "CMD-REQ-02": "Organizational inventory with technology alternatives and objectives",
+                "CMD-TECH-01": "Organizational mandatory inventory enforced",
+                "CMD-TECH-02": "Team manages dependencies, no vulnerability analysis",
+                "CMD-STEST-01": "Organizational strategies shared across teams",
+                "CMD-STEST-02": "Automated tests in pipeline",
+                "CMD-PTEST-01": "Mandatory organizational penetration testing program",
+                "CMD-OPSEC-01": "Organizational configurations enforced",
+                "CMD-OPSEC-02": "Application and infrastructure monitoring",
+                "CMD-OPSEC-03": "Incident exchange with response team, bugs created",
+                "CMD-OPSEC-04": "Organizational response team with mandatory training",
+                "CMD-CFGM-01": "Organizational inventory with integrity testing",
+                "CMD-CFGM-02": "Organizational SBOM definition, majority of products covered",
+                "CMD-CFGM-03": "Organizational rules, centralized branching, metrics",
+                "CMD-CI-01": "Organizational CI with quality-metric control gates",
+                "CMD-QADSO-01": "Organizational pipeline integration with automation",
+                "CMD-QADSO-02": "Team strategy with goals and manually collected metrics",
+                "CMD-CD-01": "Automated restore with data loss prevention"
+            },
+            "expected_clr_triggers": [],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 3,
+                "target_scope": 3,
+                "target_knowledge": 2,
+                "target_management": 3,
+                "activated_by_ocm": [
+                    "PRA-CS-GOV-07",
+                    "PRA-CS-GOV-08",
+                    "PRA-CS-REQ-01",
+                    "PRA-CS-RISK-01",
+                    "PRA-CS-RISK-03",
+                    "PRA-CS-CFGM-02",
+                    "PRA-CS-CI-03",
+                    "PRA-CS-OPSEC-01",
+                    "PRA-CS-OPSEC-03",
+                    "PRA-CS-OPSEC-04"
+                ],
+                "commentary": "Strong governance + limited knowledge is characteristic of bureaucratic institutions; the CLR must mediate between declared organizational maturity and baseline competence. If CLR-10 is resolved affirmatively, the output profile should flag the Knowledge dimension as an improvement area rather than downgrading."
+            }
+        },
+        {
+            "id": "TC-07",
+            "title": "Adversarial Stress-Test (contradictory responses)",
+            "archetype": "Low-maturity org over-claiming high-maturity practices",
+            "narrative": "A synthetic case constructed to maximise CLR activations. The respondent represents an organization that declares an undefined SDLC and minimal awareness (OCM-05='Undefined', OCM-10='Minimal awareness') yet selects high-maturity answers on five capabilities. The test verifies that the SLM does not silently accept contradictions and that CLR-09 and CLR-10 fire as cross-cutting fallbacks. It also exercises CLR-01, CLR-03, CLR-04 simultaneously.",
+            "ocm_answers": {
+                "OCM-01": "High",
+                "OCM-02": "High",
+                "OCM-03": "Risk-Tolerant",
+                "OCM-04": [
+                    "None explicitly identified"
+                ],
+                "OCM-05": "Undefined",
+                "OCM-06": "Single team or very small organization",
+                "OCM-07": "No external providers",
+                "OCM-08": "No",
+                "OCM-09": "On-premise only",
+                "OCM-10": "Minimal awareness"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-04"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-02"
+                ],
+                "CAP-CS-REQ": [],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-03"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01"
+                ],
+                "CAP-CS-CD": []
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "No",
+                "CMD-GOV-04": "Organization defines mandatory/optional SDLC security practices",
+                "CMD-RISK-01": "No risk management",
+                "CMD-RISK-02": "Formal security write-off required",
+                "CMD-TECH-01": "Organizational mandatory inventory enforced",
+                "CMD-STEST-01": "No security testing",
+                "CMD-STEST-02": "Automated tests in pipeline",
+                "CMD-OPSEC-01": "Organizational configurations enforced",
+                "CMD-OPSEC-03": "Incident exchange with response team, bugs created",
+                "CMD-CFGM-01": "No inventory",
+                "CMD-CFGM-02": "Automated SBOM per product",
+                "CMD-CI-01": "Organizational CI with quality-metric control gates",
+                "CMD-QADSO-01": "Organizational pipeline integration with automation"
+            },
+            "expected_clr_triggers": [
+                {
+                    "id": "CLR-01",
+                    "reason": "GOV-03 inferred L3+ via GOV-04 while GOV-01 at L0."
+                },
+                {
+                    "id": "CLR-03",
+                    "reason": "RISK-02 L3 while RISK-01 L0."
+                },
+                {
+                    "id": "CLR-04",
+                    "reason": "STEST-02 L2 while STEST-01 L0."
+                },
+                {
+                    "id": "CLR-08",
+                    "reason": "CFGM-04 L2 while CFGM-01 L0."
+                },
+                {
+                    "id": "CLR-09",
+                    "reason": "OCM-05='Undefined' but OPSEC-01, CI-01, QADSO-01 at L3."
+                },
+                {
+                    "id": "CLR-10",
+                    "reason": "OCM-10='Minimal awareness' but multiple practices claimed at proficient level."
+                }
+            ],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 1,
+                "target_scope": 1,
+                "target_knowledge": 1,
+                "target_management": 1,
+                "activated_by_ocm": [],
+                "commentary": "If no CLR is resolved, fallback rules should cap practice levels aggressively: GOV-03→L1 (CLR-01), RISK-02→L1 (CLR-03), STEST-02→L1 (CLR-04), TECH-01→L1 (CLR-07 fallback), CFGM-04→L1 (CLR-08), all practices capped at L2 (CLR-09 fallback), knowledge dimension capped at L1 (CLR-10). This test verifies the robustness of the conflict-resolution chain."
+            }
+        },
+        {
+            "id": "TC-08",
+            "title": "Industrial Manufacturer with OT-adjacent Software",
+            "archetype": "Multi-team, legacy + greenfield, high-regulation (sector-specific), CI/threat-assessment maturity mismatch",
+            "narrative": "A Tier-1 automotive supplier producing embedded telematics software. Three software teams operate alongside legacy firmware groups. A central DevOps platform enforces CI pipelines across all teams, but build-process formality varies sharply: the telematics team has organizationally enforced CI (Level 3) running over ad-hoc per-team build scripts. Security is a strong priority because of sector-specific regulations (UNECE R155/R156). Threat assessments are performed for each major project, but no systematic vulnerability or attacker-pattern catalogue exists at organizational level. This case is designed to exercise CLR-11 (CI-01 vs CI-02) and CLR-12 (RISK-05 vs RISK-04) simultaneously.",
+            "ocm_answers": {
+                "OCM-01": "Low",
+                "OCM-02": "High",
+                "OCM-03": "Risk-Averse",
+                "OCM-04": [
+                    "ISO/IEC 27001",
+                    "Sector-specific regulation"
+                ],
+                "OCM-05": "Formal",
+                "OCM-06": "Multiple teams with centralized governance",
+                "OCM-07": "Significant reliance on external providers",
+                "OCM-08": "Yes, limited scope",
+                "OCM-09": "Hybrid (on-premise and cloud)",
+                "OCM-10": "Proficient in core security practices"
+            },
+            "expected_tier2_selection": {
+                "CAP-CS-GOV": [
+                    "CMD-GOV-01",
+                    "CMD-GOV-03",
+                    "CMD-GOV-04",
+                    "CMD-GOV-05",
+                    "CMD-GOV-07"
+                ],
+                "CAP-CS-RISK": [
+                    "CMD-RISK-01",
+                    "CMD-RISK-02",
+                    "CMD-RISK-03",
+                    "CMD-RISK-04"
+                ],
+                "CAP-CS-REQ": [
+                    "CMD-REQ-01",
+                    "CMD-REQ-02"
+                ],
+                "CAP-CS-TECH": [
+                    "CMD-TECH-01",
+                    "CMD-TECH-02"
+                ],
+                "CAP-CS-STEST": [
+                    "CMD-STEST-01",
+                    "CMD-STEST-02"
+                ],
+                "CAP-CS-PTEST": [
+                    "CMD-PTEST-01"
+                ],
+                "CAP-CS-OPSEC": [
+                    "CMD-OPSEC-01",
+                    "CMD-OPSEC-02",
+                    "CMD-OPSEC-03",
+                    "CMD-OPSEC-04"
+                ],
+                "CAP-CS-CFGM": [
+                    "CMD-CFGM-01",
+                    "CMD-CFGM-02",
+                    "CMD-CFGM-03"
+                ],
+                "CAP-CS-CI": [
+                    "CMD-CI-01"
+                ],
+                "CAP-CS-QADSO": [
+                    "CMD-QADSO-01",
+                    "CMD-QADSO-02"
+                ],
+                "CAP-CS-CD": [
+                    "CMD-CD-01"
+                ]
+            },
+            "scripted_cmd_answers": {
+                "CMD-GOV-01": "Organization-wide enforced policy",
+                "CMD-GOV-03": "Organizational SAT plan including executives",
+                "CMD-GOV-04": "Team-level goals and practices defined for SDLC",
+                "CMD-GOV-05": "Team-designated security members",
+                "CMD-GOV-07": "Organizational compliance catalog with SDLC translation",
+                "CMD-RISK-01": "Organizational risk strategy with application classification",
+                "CMD-RISK-02": "Team considers risks, no formal write-off",
+                "CMD-RISK-03": "Only known vulnerabilities, ad-hoc",
+                "CMD-RISK-04": "Per-project threat assessment and abuse cases",
+                "CMD-REQ-01": "Organizational enforcement with cross-product integration",
+                "CMD-REQ-02": "Team-level definitions of required features",
+                "CMD-TECH-01": "Team-level internal definitions",
+                "CMD-TECH-02": "Organizational SCA rules and enforced tool usage",
+                "CMD-STEST-01": "Team-defined strategy traced to requirements",
+                "CMD-STEST-02": "Automated tests in pipeline",
+                "CMD-PTEST-01": "External tests and tools used",
+                "CMD-OPSEC-01": "Organizational configurations enforced",
+                "CMD-OPSEC-02": "Application and infrastructure monitoring",
+                "CMD-OPSEC-03": "Defined detection and treatment process",
+                "CMD-OPSEC-04": "Trained individuals within the team",
+                "CMD-CFGM-01": "Organizational inventory with integrity testing",
+                "CMD-CFGM-02": "Automated SBOM per product",
+                "CMD-CFGM-03": "Organizational rules, centralized branching, metrics",
+                "CMD-CI-01": "Organizational CI with quality-metric control gates",
+                "CMD-QADSO-01": "Team-defined rules for tool usage",
+                "CMD-QADSO-02": "Team strategy with goals and manually collected metrics",
+                "CMD-CD-01": "Automated restore with data loss prevention"
+            },
+            "expected_clr_triggers": [
+                {
+                    "id": "CLR-11",
+                    "reason": "CMD-CI-01 scripted at L3 (organizational CI with control gates) but CI-02 (build process) inferred at L0-1 given 'ad-hoc per-team build scripts' in the narrative. CLR-11 must fire."
+                },
+                {
+                    "id": "CLR-12",
+                    "reason": "RISK-05 (threat-evaluation system) inferred at L2+ from RISK-04 L2 (per-project threat assessments), while RISK-03 L1 (ad-hoc vulnerability identification) signals that RISK-04 (vulnerability catalogue) is at L0-1. CLR-12 fires."
+                }
+            ],
+            "expected_maturity_profile_summary": {
+                "target_main_approach": 3,
+                "target_scope": 3,
+                "target_knowledge": 3,
+                "target_management": 2,
+                "regulatory_floor_overrides_to_level": 3,
+                "activated_by_ocm": [
+                    "PRA-CS-GOV-07",
+                    "PRA-CS-GOV-08",
+                    "PRA-CS-REQ-01",
+                    "PRA-CS-RISK-01",
+                    "PRA-CS-RISK-03",
+                    "PRA-CS-CFGM-02",
+                    "PRA-CS-CI-03",
+                    "PRA-CS-OPSEC-01",
+                    "PRA-CS-OPSEC-03",
+                    "PRA-CS-OPSEC-04"
+                ],
+                "commentary": "Profile reflects a mature but unevenly-implemented organization. If both CLRs are resolved 'declined' (user does not clarify), fallback rules reduce RISK-05 to L1 and cap CI-01 at L2. Together these demonstrate how the CLR tier prevents over-claiming of maturity when dependent practices are absent."
+            },
+            "scripted_inferred_levels": {
+                "PRA-CS-CI-02": 1,
+                "PRA-CS-RISK-05": 2
+            }
+        }
+    ]
+}

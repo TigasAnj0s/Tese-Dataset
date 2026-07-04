@@ -1,0 +1,1216 @@
+{
+  "domain": {
+    "id": "DOM-CS",
+    "name": "Cybersecurity",
+    "version": "1.0.0",
+    "description": "Practices and processes for secure software development, encompassing governance, risk management, requirements, technical solution, quality assurance, security testing, penetration testing, operational security, configuration management, continuous integration, quality assurance (DevSecOps), and continuous delivery. Aligned with BSIMM, SAMM, and DevSecOps frameworks.",
+    "maturity_levels": {
+      "level_0": {
+        "label": "Inexistent or Incomplete",
+        "main_approach": null,
+        "scope": null,
+        "knowledge_level": null,
+        "management_degree": null
+      },
+      "level_1": {
+        "label": "Reactive / Individual / Aware / Not Managed",
+        "main_approach": "Reactive",
+        "scope": "Individual",
+        "knowledge_level": "Aware",
+        "management_degree": "Not Managed"
+      },
+      "level_2": {
+        "label": "Reactive / Individual / Proficient / Managed",
+        "main_approach": "Reactive",
+        "scope": "Individual",
+        "knowledge_level": "Proficient",
+        "management_degree": "Managed"
+      },
+      "level_3": {
+        "label": "Proactive / Organizational / Proficient / Managed",
+        "main_approach": "Proactive",
+        "scope": "Organizational",
+        "knowledge_level": "Proficient",
+        "management_degree": "Managed"
+      },
+      "level_4": {
+        "label": "Predictive / Organizational / Mastered / Optimized",
+        "main_approach": "Predictive",
+        "scope": "Organizational",
+        "knowledge_level": "Mastered",
+        "management_degree": "Optimized"
+      }
+    },
+    "capabilities": [
+      {
+        "id": "CAP-CS-GOV",
+        "name": "Governance",
+        "description": "Establishment and maintenance of security governance structures, policies, strategies, awareness programs, roles, metrics, PII inventories, and compliance monitoring.",
+        "practices": [
+          {
+            "id": "PRA-CS-GOV-01",
+            "name": "Define a Security Policy",
+            "description": "Definition and enforcement of a security-focused process, ranging from a simple set of working agreements to a well-defined organizational process.",
+            "references": ["BSIMM:SM1.1"],
+            "levels": {
+              "level_0": "Security is not explicitly addressed.",
+              "level_1": "Some team members have identified security as a need but no definition was made.",
+              "level_2": "The team has a set of ways of working applied to security. The team has a security-related process that has been documented and is applied in the team.",
+              "level_3": "The organization defines a security-related set of rules that are enforced in all the teams.",
+              "level_4": "The organization has a defined process that is continuously monitored and adjusted with the prediction models in use by the organization."
+            }
+          },
+          {
+            "id": "PRA-CS-GOV-02",
+            "name": "Promote and Develop Security-Focused Knowledge and Skills",
+            "description": "Ensuring security knowledge dissemination across the organization through awareness training and specific security education.",
+            "references": ["BSIMM:SM1.3", "BSIMM:CP2.5", "BSIMM:T1.1", "BSIMM:T1.7", "BSIMM:T3.4", "SAMM:EG1A"],
+            "levels": {
+              "level_0": "There is no security awareness or training in place.",
+              "level_1": "Informal security awareness events are executed.",
+              "level_2": "The team identifies the security knowledge needs. Security Awareness Training is performed ad-hoc.",
+              "level_3": "There is an organizational plan for security awareness training and specific security trainings. Executives are also part of SAT.",
+              "level_4": "Organizational Security Training and Awareness events are held as part of a plan. Teams identify specific needs for security training."
+            }
+          },
+          {
+            "id": "PRA-CS-GOV-03",
+            "name": "Define and Implement a Security Strategy",
+            "description": "Definition of security goals, integration of security rules into the SDLC, and continuous feedback from usage to refine the strategy.",
+            "references": ["BSIMM:SM1.4", "BSIMM:SM2.2", "BSIMM:SM2.6", "BSIMM:SM3.4", "BSIMM:CP1.3", "BSIMM:CP3.3", "SAMM:SM1B"],
+            "levels": {
+              "level_0": "There is no definition of a security strategy or policy. Security is not integrated into the SDLC.",
+              "level_1": "There is a set of goals for security.",
+              "level_2": "At a team level exists security goals and definitions of specific practices in the SDLC.",
+              "level_3": "The organization has defined a set of mandatory and optional security practices to be used in the SDLC. The enforcement is made by an organizational team.",
+              "level_4": "The organization enforces and analyzes the results from using the security practices in the SDLC. This analysis results in adjustments made into the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-GOV-04",
+            "name": "Make Security Visible and Important to Decisions",
+            "description": "Making security-focused information and data available to the different roles in the organization to support decision-making.",
+            "references": ["BSIMM:SM2.1"],
+            "levels": {
+              "level_0": "There is no visibility on security strategies, practices or problems.",
+              "level_1": "When a security issue is found, it is managed in the team.",
+              "level_2": "The team has a set of rules for making security issues and practices visible for the team.",
+              "level_3": "The organization defines a set of rules for making security practices, events and incidents visible for the whole organization.",
+              "level_4": "The data being registered from the security practices is analyzed and its results integrated in the overall security strategy and SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-GOV-05",
+            "name": "Establish Security-Focused Profiles",
+            "description": "Definition of security roles at team and organizational level, including satellites and a Center of Excellence.",
+            "references": ["BSIMM:SM2.3", "BSIMM:SM2.7", "BSIMM:T2.5", "BSIMM:T2.9"],
+            "levels": {
+              "level_0": "There are no specific security roles or profiles.",
+              "level_1": "There are team members that are more familiar with security topics.",
+              "level_2": "The team has identified a set of team members that are focused on security practices.",
+              "level_3": "Organization identified a Security Center of Competence that can define and maintain the security strategy. Teams have identified satellites.",
+              "level_4": "Security Center of Competence works with Satellites for identifying improvements and to implement them."
+            }
+          },
+          {
+            "id": "PRA-CS-GOV-06",
+            "name": "Define and Monitor Security-Focused Metrics",
+            "description": "Definition, implementation, and monitoring of metrics fulfilling different information needs across the organization.",
+            "references": ["BSIMM:SM3.3", "SAMM:SM2B", "SAMM:SM3B"],
+            "levels": {
+              "level_0": "No security metrics exist.",
+              "level_1": "Some metrics are being collected without consistency.",
+              "level_2": "Team defined some metrics. Each metric has a known definition.",
+              "level_3": "Organization defined a metrics catalog where each metric is defined and characterized. Analysis is made per team.",
+              "level_4": "Organization analyzes metrics on team level but also on org level. Feedback is collected and integrated into the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-GOV-07",
+            "name": "Develop, Use and Maintain an Inventory of PII",
+            "description": "Management of personal identification information through an evolving inventory or catalog, prioritizing applications by the data they process.",
+            "references": ["BSIMM:CP1.2", "BSIMM:CP2.1", "BSIMM:AM1.2"],
+            "levels": {
+              "level_0": "Personal data is not explicitly being managed.",
+              "level_1": "Personal data is being used and there is some knowledge of it. Obligations are managed in an ad-hoc approach.",
+              "level_2": "Team knows which personal data is being used and why it is used.",
+              "level_3": "Organization has a catalog for the majority of personal data being used, with its composition, usage and justification.",
+              "level_4": "Used Personal data is a mandatory definition for each product and all that information is maintained in the organizational catalog."
+            }
+          },
+          {
+            "id": "PRA-CS-GOV-08",
+            "name": "Define, Use and Maintain Compliance Guards",
+            "description": "Monitoring process quality through compliance checks, ranging from simple verifications to automated compliance.",
+            "references": ["BSIMM:CP2.3"],
+            "levels": {
+              "level_0": "Compliance is not considered. Obligations are often seen as surprises.",
+              "level_1": "Compliance is fully reactive and not explicitly managed.",
+              "level_2": "Team identifies what kind of compliance obligations are needed and defines tasks for addressing it.",
+              "level_3": "Organization has a set of mandatory and optional regulations, characterized by its own obligations and on how to translate those into SDLC regulations.",
+              "level_4": "Organization monitors and enforces all the obligations. Results are analyzed and integrated into the SDLC. New regulations are evaluated before being published for impact analysis."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-RISK",
+        "name": "Risk Management",
+        "description": "Evaluation and management of security risks, including risk-based decision making, external provider contracts, attacker/vulnerability identification, threat evaluation, and top security issues tracking.",
+        "practices": [
+          {
+            "id": "PRA-CS-RISK-01",
+            "name": "Evaluate Data and Applications from a Risk Perspective",
+            "description": "Estimation of overall business risk profile; risks are used to rank applications.",
+            "references": ["BSIMM:AA1.4", "SAMM:SM1A", "SAMM:SM2A"],
+            "levels": {
+              "level_0": "Repeated problems occur as there is no risk management strategy. Risks are not known.",
+              "level_1": "Repeated problems occur, as risks are identified but not properly handled. No risk management strategy is in place.",
+              "level_2": "Team identifies risks and has tasks for addressing those risks. Analysis is done only inside the team.",
+              "level_3": "A risk management strategy has been defined for the organization, with identification, characterization and response definition as minimal parts. Applications are classified for its security-risks.",
+              "level_4": "Organizational risk management is defined and enforced. Risk analysis is made at a team and at an organizational level. Periodically the organization analyses the overall risk and integrates the results into the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-RISK-02",
+            "name": "Use Risks as a Decision Point for Releasing",
+            "description": "Risk analysis over security as an important part of release decision-making, evolving from compliance checkpoints to risk analysis.",
+            "references": ["BSIMM:CP2.2", "SAMM:PC3A", "SAMM:DR3B"],
+            "levels": {
+              "level_0": "Releasing decision is an ad-hoc one, based on subjective criteria.",
+              "level_1": "Some security risks are considered for releasing software but no explicit criteria is being used.",
+              "level_2": "Team identifies security risks and takes those into consideration for releasing but no explicit write-off is made.",
+              "level_3": "Organization requires a formal security write-off for releasing software. Criteria is based on the risks obligations catalogs.",
+              "level_4": "Analysis on the difficulties found per release drives process improvement initiatives over the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-RISK-03",
+            "name": "Explicitly Manage a Security Contract with External Providers",
+            "description": "Managing security requirements for external providers, from basic security issue reporting to automated pipeline integration.",
+            "references": ["BSIMM:CP2.4", "BSIMM:CP3.2", "BSIMM:T3.2", "SAMM:TA3A", "SAMM:SR3A", "DEVSECOPS:GOV9.1"],
+            "levels": {
+              "level_0": "External providers are not evaluated with security criteria.",
+              "level_1": "Security criteria are included in the external provider selection.",
+              "level_2": "External providers are chosen based also on security criteria, but no follow-up is made.",
+              "level_3": "Organization defines a set of security obligations that every external provider must follow. These are enforced and monitored.",
+              "level_4": "Organization runs periodical analysis on what new security obligations need to be included and also on the current problems found with the actual providers."
+            }
+          },
+          {
+            "id": "PRA-CS-RISK-04",
+            "name": "Identify and Manage Potential Attackers, Attacks and Vulnerabilities",
+            "description": "Identification of potential attackers to understand motivations and abilities; building attack pattern scenarios.",
+            "references": ["BSIMM:AM1.3", "BSIMM:AM1.5", "BSIMM:AM2.1", "BSIMM:AM2.2", "BSIMM:AM2.5", "SAMM:TA1A", "SAMM:DR1A"],
+            "levels": {
+              "level_0": "Vulnerabilities, possible attacks and attackers are not identified. Security issues happen without any preparation from teams.",
+              "level_1": "Only known vulnerabilities are identified, and as part of an ad-hoc process.",
+              "level_2": "Vulnerabilities are identified as part of the team's product.",
+              "level_3": "Periodically, the organization reviews the set of vulnerabilities, types of attacks and attackers that their systems can be exposed to. An organizational catalog is updated. Patterns for attacks are developed and communicated.",
+              "level_4": "The organization evaluates vulnerabilities, attacks and attackers in order to understand, for each technology stack, which ones are more probable to happen and integrates this analysis in the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-RISK-05",
+            "name": "Define, Use and Maintain a System for Evaluating Threats",
+            "description": "Threat analysis system producing threat assessments and abuse case models for each project/product.",
+            "references": ["SAMM:TA2A", "SAMM:SR2B"],
+            "levels": {
+              "level_0": "No threat analysis exists.",
+              "level_1": "The team performs some threat analysis based on specific cases that are somehow known in the community.",
+              "level_2": "Each project produces a threat assessment and maintains an abuse case as part of the evolution.",
+              "level_3": "Every product/project in the company has a threat assessment and an abuse case model. The organization enforces this existence and periodically evaluates it.",
+              "level_4": "The evaluation for the different threat assessments and abuse case models leads to a periodic evaluation of the SDLC and its control gates."
+            }
+          },
+          {
+            "id": "PRA-CS-RISK-06",
+            "name": "Define, Use and Maintain a List of Most Important Security Issues",
+            "description": "Maintaining a prioritized list of top security issues, potentially per technology stack.",
+            "references": ["BSIMM:CR2.7"],
+            "levels": {
+              "level_0": "There isn't any registry of known security issues.",
+              "level_1": "Some teams produce a list of known security issues, based on information collected in the community.",
+              "level_2": "Teams have a list of top N bugs, ordered by importance on their own system.",
+              "level_3": "The organization enforces a catalog of the top N more important bugs for every critical system.",
+              "level_4": "The list of bugs is periodically reviewed and updated and the feedback integrates the SDLC in order to remove or reduce the impact of those bugs."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-REQ",
+        "name": "Requirements",
+        "description": "Management of regulatory needs and security feature requirements throughout the SDLC.",
+        "practices": [
+          {
+            "id": "PRA-CS-REQ-01",
+            "name": "Develop, Use and Maintain a Set of Regulatory Needs",
+            "description": "Identification and management of regulatory requirements, evolving from simple identification to a well-defined requirements set.",
+            "references": ["BSIMM:CP1.1", "BSIMM:SR1.3", "SAMM:PC1A", "SAMM:SR1B"],
+            "levels": {
+              "level_0": "Regulatory needs are not explicitly managed.",
+              "level_1": "Some regulatory needs are added as isolated requirements in system's requirements.",
+              "level_2": "Each team needs to identify the regulatory needs that affect their product and translate those into requirements.",
+              "level_3": "The organization enforces that each product has identified the regulatory needs and integrates those with common ones for every piece of software being produced.",
+              "level_4": "The organization periodically reviews all the regulatory needs and produces an analysis on the impact each one of those might have in the products."
+            }
+          },
+          {
+            "id": "PRA-CS-REQ-02",
+            "name": "Define, Integrate and Deliver Security Features",
+            "description": "Identification and delivery of security features at team or organizational level with defined guidelines.",
+            "references": ["BSIMM:SFD1.1", "SAMM:PC1B", "SAMM:SR1A", "BSIMM:AA1.1"],
+            "levels": {
+              "level_0": "No classification of security features exists. Features are considered in isolation for each product.",
+              "level_1": "Some teams align with the same technology for some security features like authentication.",
+              "level_2": "Teams have a definition of what needs to be used and which characteristics need to be maintained for each security feature.",
+              "level_3": "The organization defines an inventory of security features and those have consistent technology alternatives and security objectives attached to them.",
+              "level_4": "Periodically the organization analyzes the inventory of security features, the technologies being used and updates the SDLC in order to promote this usage."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-TECH",
+        "name": "Technical Solution",
+        "description": "Management of security-by-design components, software composition analysis, technical capability development, and technology-focused security standards.",
+        "practices": [
+          {
+            "id": "PRA-CS-TECH-01",
+            "name": "Identify and Manage Security-by-Design Components and Services",
+            "description": "Pre-defined security-by-design practices evolving from team level to organizational and automated level, with technical committee approval.",
+            "references": ["BSIMM:SFD2.1", "BSIMM:SFD3.1", "BSIMM:SR1.1", "SAMM:SA1A", "SAMM:SA1B", "BSIMM:SFD3.2", "BSIMM:SFD3.3", "SAMM:SA2A"],
+            "levels": {
+              "level_0": "Security-by-design is not explicitly addressed. Teams make technical decisions based solely on isolated requirements and on other quality attributes.",
+              "level_1": "Technical solutions for security and security-by-design needs are defined as a case-by-case approach.",
+              "level_2": "Teams have internal definitions on how to implement the security requirements. These definitions are used consistently in the team.",
+              "level_3": "The organization defines and shares an inventory of components and techniques that should be used for implementing the security features. The usage of these components is mandatory and it's enforced across the organization.",
+              "level_4": "The organization periodically analyzes the security components and predicts its behavior, updating them as needed. The organization develops a capability of solving difficult design problems."
+            }
+          },
+          {
+            "id": "PRA-CS-TECH-02",
+            "name": "Integrate Software Composition Analysis Tools",
+            "description": "Origin analysis or software composition analysis for determining the usage and security posture of external components.",
+            "references": ["DEVSECOPS:Dev4.1"],
+            "levels": {
+              "level_0": "The composition of software is not explicit. Dependencies are not explicitly managed.",
+              "level_1": "Software composition is only made with external dependencies, but no integrity check is made.",
+              "level_2": "The team explicitly manages all the software dependencies, but no analysis is made on the vulnerabilities and integrity of those dependencies.",
+              "level_3": "Organization defines a set of rules for software composition. Tools for managing it are identified and its use is enforced.",
+              "level_4": "Organization analyzes the overall results from the different teams and identifies improvement initiatives for better, more secure software. Results from the tools are used to plan and predict behaviors in the software."
+            }
+          },
+          {
+            "id": "PRA-CS-TECH-03",
+            "name": "Develop and Maintain Technical Capability for Security Features",
+            "description": "Identification and development of technical capabilities needed for implementing security features.",
+            "references": ["BSIMM:SFD2.2", "SAMM:EG1B", "SAMM:EG2A", "SAMM:SA3A"],
+            "levels": {
+              "level_0": "The team has not identified the capabilities needed for implementing security features as those have not been defined.",
+              "level_1": "Based on the identified security features, the team identifies what kind of capabilities are needed.",
+              "level_2": "Analyzing the security features and the regulation needs, the team defines the needed capabilities and implements an action plan to get them.",
+              "level_3": "The capabilities needed are managed at organizational level, being identified and worked across different teams.",
+              "level_4": "A proactive approach is followed with the discovery of new security features and regulation needs and implementing a program for acquiring the needed capabilities."
+            }
+          },
+          {
+            "id": "PRA-CS-TECH-04",
+            "name": "Define, Use and Maintain a Technology-Focused Security Standard",
+            "description": "A security standard that entails how to use the technology and what kind of reviews are needed.",
+            "references": ["BSIMM:SR3.4", "BSIMM:AA1.2", "BSIMM:CR3.5", "SAMM:TA1B", "SAMM:DR1B"],
+            "levels": {
+              "level_0": "No standard exists.",
+              "level_1": "Team has some recommendations towards security.",
+              "level_2": "Teams have defined a security standard for its use, with a set of goals, regulation needs and security features.",
+              "level_3": "Organization defines a standard that integrates regulation needs, security features and security components into the SDLC.",
+              "level_4": "Organization performs periodic analyses on the usage of the security standard, and based on predictive analysis, defines a set of improvements to be incorporated."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-QA",
+        "name": "Quality Assurance",
+        "description": "Code review strategy, software architecture review, static analysis for security, and work audit policy.",
+        "practices": [
+          {
+            "id": "PRA-CS-QA-01",
+            "name": "Define, Use and Maintain a Code Review Strategy",
+            "description": "Code reviews ranging from opportunistic to using automated tools, mandatory for all projects.",
+            "references": ["BSIMM:CR1.2", "BSIMM:CR1.4", "BSIMM:CR1.5", "BSIMM:CR2.6", "BSIMM:CR3.4", "SAMM:CR1A", "SAMM:CR1B", "SAMM:CR2A", "SAMM:CR2B", "SAMM:CR3B", "BSIMM:CR1.6", "BSIMM:CR3.3"],
+            "levels": {
+              "level_0": "Code reviews are not used or used as an ad-hoc way, covering only a small part of the code being produced.",
+              "level_1": "Code reviews exist but without any defined process, objectives or practice definition.",
+              "level_2": "Code reviews are made consistently in the team, following internal guidelines. Results are registered and managed. Across the organization might not exist consistency.",
+              "level_3": "Organization defines a code review standard, with specific recommendations and guidelines per technology. Enforcement is implemented at organization level and results are communicated.",
+              "level_4": "Data from code reviews is analyzed in order to produce predictive analysis on the outcomes."
+            }
+          },
+          {
+            "id": "PRA-CS-QA-02",
+            "name": "Define, Use and Maintain a Review of the Software Architecture",
+            "description": "Review of software architecture against regulation needs, security components and security features.",
+            "references": ["SAMM:SA3B", "SAMM:DR2B"],
+            "levels": {
+              "level_0": "Software Architecture is not reviewed.",
+              "level_1": "Software architecture is reviewed in an ad-hoc process, dependent on the person that needs to do it.",
+              "level_2": "Software Architecture is reviewed against regulation needs, security components and security features at the team level.",
+              "level_3": "Software architecture is reviewed against regulation needs, security components and security features at the organizational level. Objectives are defined and enforced throughout the organization.",
+              "level_4": "Software architecture is reviewed and the collected data is analyzed in order to predict the outcome of the different security components being enforced in the organization."
+            }
+          },
+          {
+            "id": "PRA-CS-QA-03",
+            "name": "Define, Use and Maintain Static Analysis Tools for Security",
+            "description": "Definition for the use of static analysis tools in security, integrated with DevOps Quality Assurance practices.",
+            "references": ["DEVSECOPS:Dev4.3"],
+            "levels": {
+              "level_0": "No static analysis is used.",
+              "level_1": "Only manual reviews are used for static analysis.",
+              "level_2": "The team already uses tools for static analysis, aligned with the team regulation needs, security components and security features.",
+              "level_3": "Organizational static analysis tools are identified and deployed to be used by the different teams in the organization. Analysis is done to understand the performance of the different systems.",
+              "level_4": "Organizational static analysis tools are used and data is collected from them. This data is used to analyze the current outcome and predict future ones."
+            }
+          },
+          {
+            "id": "PRA-CS-QA-04",
+            "name": "Define, Use and Maintain a Work Audit Policy and Practice",
+            "description": "Internal audit policy ranging from team-level to organizational-level auditing with predictive analysis.",
+            "references": ["SAMM:PC2B", "SAMM:CR2B", "DEVSECOPS:GOV8"],
+            "levels": {
+              "level_0": "No internal audits are used. Problems are hidden in the teams.",
+              "level_1": "Internal audits follow an ad-hoc process, being executed when there is some problem to be analyzed.",
+              "level_2": "The team defines a process for internal audit, aligned with the regulation needs, security features and security components. No comparison across the organization is made.",
+              "level_3": "Organization defines an internal audit process and enforces it. This process is based on the SDLC and it encompasses the regulation needs, security features usage.",
+              "level_4": "Organizational data is collected from the internal audit process, which is then used for producing a predictive analysis on the possible outcomes of those audits."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-STEST",
+        "name": "Security Testing",
+        "description": "Security verification strategy, security-focused tests, results communication, and testing objectives monitoring.",
+        "practices": [
+          {
+            "id": "PRA-CS-STEST-01",
+            "name": "Define, Use and Maintain a Security Verification Strategy",
+            "description": "From manual security testing to automated, defining the overall approach to security verification.",
+            "references": ["BSIMM:ST1.1", "BSIMM:ST1.3", "SAMM:ST2B"],
+            "levels": {
+              "level_0": "Security-focused tests are inexistent.",
+              "level_1": "Security-focused testing is performed without a defined process, without goals. Problems found are registered as bugs.",
+              "level_2": "Team defines a security testing strategy, based on the regulation needs, security features and the system's requirements. Tests are traced to requirements and results are registered and communicated. Problems are registered as security bugs. Security testing is included in the SDLC.",
+              "level_3": "The organization defines a set of different security testing strategies that different teams can use. Results are registered and shared across the organization. Results are analyzed as a whole.",
+              "level_4": "Results from security testing are collected and analyzed. Automated security-testing is mandatory."
+            }
+          },
+          {
+            "id": "PRA-CS-STEST-02",
+            "name": "Define, Use and Maintain a Set of Security-Focused Tests",
+            "description": "Specific security tests ranging from opaque-box techniques to adversarial and event-driven testing.",
+            "references": ["BSIMM:ST1.4", "BSIMM:ST2.5", "BSIMM:ST2.6", "BSIMM:ST3.3", "BSIMM:ST3.5", "SAMM:ST1A", "SAMM:ST2A", "DEVSECOPS:TES3.2"],
+            "levels": {
+              "level_0": "Security-focused tests are inexistent.",
+              "level_1": "Security tests integrate opaque-box techniques.",
+              "level_2": "Security tests are integrated into the SDLC. Security tests are automated and part of the pipeline.",
+              "level_3": "Security tests are driven by risk analysis. A coverage analysis is performed.",
+              "level_4": "Adversarial security tests are used and event-driven testing in automation is also implemented."
+            }
+          },
+          {
+            "id": "PRA-CS-STEST-03",
+            "name": "Communicate the Results of Security Testing",
+            "description": "Communication of security testing results across teams and the organization.",
+            "references": ["BSIMM:ST2.4"],
+            "levels": {
+              "level_0": "Security testing results don't exist.",
+              "level_1": "Security testing results are not communicated.",
+              "level_2": "Security testing results are maintained inside the team.",
+              "level_3": "Security testing results are analyzed from an organizational perspective and deviations are identified.",
+              "level_4": "Security testing results are analyzed and improvements for the SDLC are identified."
+            }
+          },
+          {
+            "id": "PRA-CS-STEST-04",
+            "name": "Define Security Testing Objectives and Monitor to Completion",
+            "description": "Setting and monitoring security testing objectives including coverage goals.",
+            "references": ["BSIMM:ST3.4", "SAMM:ST3B"],
+            "levels": {
+              "level_0": "No objectives are defined for security testing.",
+              "level_1": "Team has expectations on security testing but not defined objectives.",
+              "level_2": "The team defines security testing objectives, already defining coverage objectives.",
+              "level_3": "Organizational objectives are defined for security testing. All objectives are to be decomposed at the different organizational levels.",
+              "level_4": "Organizational objectives are defined and predictive results are also defined."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-PTEST",
+        "name": "Penetration Testing",
+        "description": "Definition, execution, and monitoring of penetration tests, including results communication and coverage objectives.",
+        "practices": [
+          {
+            "id": "PRA-CS-PTEST-01",
+            "name": "Define, Use and Maintain a Set of Penetration Tests",
+            "description": "Penetration testing ranging from internal-only to customizable suites with external testers and feedback into the SDLC.",
+            "references": ["BSIMM:PT1.1", "BSIMM:PT2.2", "BSIMM:PT2.3", "BSIMM:PT3.1", "BSIMM:PT3.2", "SAMM:ST1B", "DEVSECOPS:TES5"],
+            "levels": {
+              "level_0": "No penetration testing is used.",
+              "level_1": "Penetration testing is performed only by internal testers.",
+              "level_2": "External penetration tests are executed. Penetration testing tools are used as part of the strategy.",
+              "level_3": "Organization defines a set of mandatory penetration tests. External penetration tests are mandatory. Tools for penetration testing are used.",
+              "level_4": "Customizable penetration tests suites are developed to address different scenarios. External penetration tests collect data and feedback into the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-PTEST-02",
+            "name": "Communicate the Results of Penetration Testing",
+            "description": "Communication and analysis of penetration testing results.",
+            "references": ["BSIMM:PT1.2"],
+            "levels": {
+              "level_0": "Penetration testing results don't exist.",
+              "level_1": "Penetration testing results are not communicated.",
+              "level_2": "Penetration testing results are maintained inside the team.",
+              "level_3": "Penetration testing results are analyzed from an organizational perspective and deviations are identified.",
+              "level_4": "Penetration testing results are analyzed and improvements for the SDLC are identified."
+            }
+          },
+          {
+            "id": "PRA-CS-PTEST-03",
+            "name": "Define Penetration Testing Coverage Objective and Monitor to Completion",
+            "description": "Setting and monitoring penetration testing coverage objectives.",
+            "references": ["BSIMM:PT2.3"],
+            "levels": {
+              "level_0": "No objectives are defined for penetration testing.",
+              "level_1": "Team has expectations on penetration testing but not defined objectives.",
+              "level_2": "The team defines penetration testing objectives, already defining coverage objectives.",
+              "level_3": "Organizational objectives are defined for penetration testing. All objectives are to be decomposed at the different organizational levels.",
+              "level_4": "Organizational objectives are defined and predictive results are also defined."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-OPSEC",
+        "name": "Operational Security",
+        "description": "Secure deployment, asset integrity, infrastructure adaptation, monitoring, incident registration, and security event response.",
+        "practices": [
+          {
+            "id": "PRA-CS-OPSEC-01",
+            "name": "Define, Use and Maintain a Secure Deployment Configuration",
+            "description": "Control over deployment environment ranging from basic to automated and containerized.",
+            "references": ["BSIMM:SE1.2", "BSIMM:SE2.2", "BSIMM:SE2.5", "BSIMM:SE2.6", "SAMM:EH1A", "SAMM:EH2B", "SAMM:OE2B", "DEVSECOPS:Dev7.5"],
+            "levels": {
+              "level_0": "No control over the deployment environment is made.",
+              "level_1": "Basic control over the deployment environment is in place: application input monitoring, host and network security basics.",
+              "level_2": "Security deployment parameters and configurations are defined and automated.",
+              "level_3": "Organizational security deployment parameters and configurations are defined and enforced.",
+              "level_4": "Application behavior monitor and diagnostics is in place. Environments use application containers."
+            }
+          },
+          {
+            "id": "PRA-CS-OPSEC-02",
+            "name": "Protect the Integrity of Deployed Assets",
+            "description": "Protection of code integrity across development and deployment environments.",
+            "references": ["BSIMM:SE2.4", "BSIMM:SE3.2", "SAMM:EH1B", "SAMM:OE3B", "DEVSECOPS:Dev7.6", "DEVSECOPS:Dev7.10"],
+            "levels": {
+              "level_0": "No protection is guaranteed.",
+              "level_1": "Code integrity is only maintained on development environments.",
+              "level_2": "Code integrity is maintained at team level with manual techniques.",
+              "level_3": "Code integrity is protected in all environments through automation.",
+              "level_4": "Code protection is in place to guarantee intellectual property and decrease exploit possibility."
+            }
+          },
+          {
+            "id": "PRA-CS-OPSEC-03",
+            "name": "Adapt the Infrastructure to Different Security Levels",
+            "description": "Alignment and orchestration of technologies like Cloud and Containers for different security levels.",
+            "references": ["BSIMM:SE2.6", "BSIMM:SE2.7", "SAMM:EH3A"],
+            "levels": {
+              "level_0": "Infrastructure built on-premise without using any Cloud technologies.",
+              "level_1": "Infrastructure built using virtual machines or containers in an isolated structure.",
+              "level_2": "Cloud security basics are in place.",
+              "level_3": "Cloud services and containers are orchestrated through automated pipelines.",
+              "level_4": null
+            }
+          },
+          {
+            "id": "PRA-CS-OPSEC-04",
+            "name": "Monitor the Deployed Application and Infrastructure",
+            "description": "Monitoring ranging from basic load monitoring to application behavior and cloud security analysis.",
+            "references": ["BSIMM:SE1.1", "BSIMM:SE3.3", "SAMM:EH3A"],
+            "levels": {
+              "level_0": "No monitoring over the infrastructure is used.",
+              "level_1": "Basic infrastructure monitoring is in place, with consumption parameters only: CPU, memory usage.",
+              "level_2": "Application and infrastructure monitoring is used.",
+              "level_3": "Application behavior monitoring is used.",
+              "level_4": "Virtualized environments and cloud services are analyzed and monitored for security issues."
+            }
+          },
+          {
+            "id": "PRA-CS-OPSEC-05",
+            "name": "Register and Manage Security Problems from Operational Environments",
+            "description": "Registration, management and resolution of security incidents detected in operational environments.",
+            "references": ["BSIMM:CMVM1.1", "BSIMM:CMVM1.2", "BSIMM:CMVM2.2", "BSIMM:CMVM3.1", "SAMM:VM2A"],
+            "levels": {
+              "level_0": "Security incidents are unknown or when they happen, no register is made.",
+              "level_1": "Security issues that are observed are registered as bugs and are fixed.",
+              "level_2": "Security issues are detected, registered and treated as part of a defined process.",
+              "level_3": "Security incidents are identified, registered and exchanged with response team. These are analyzed and created bugs as needed.",
+              "level_4": "Security issues are treated as part of a security incidents process, which is periodically analyzed and improved."
+            }
+          },
+          {
+            "id": "PRA-CS-OPSEC-06",
+            "name": "Establish a Security Event Response Team",
+            "description": "Definition of a security event response team with clear responsibilities and required skills.",
+            "references": ["BSIMM:CMVM2.1", "SAMM:VM1A", "SAMM:VM1B", "SAMM:VM3A", "SAMM:VM3B"],
+            "levels": {
+              "level_0": "There is no security response team.",
+              "level_1": "The response to security events is ad-hoc and performed by the team.",
+              "level_2": "Response to security events is made by people with special training within the team.",
+              "level_3": "Security events response teams are defined at the organizational level and special training is mandatory for that team.",
+              "level_4": "Security response team periodically analyzes its performance in order to improve its efficiency."
+            }
+          },
+          {
+            "id": "PRA-CS-OPSEC-07",
+            "name": "Establish a Security Event Response Process",
+            "description": "Definition and continuous improvement of the process for handling security events.",
+            "references": ["BSIMM:CMVM2.1", "SAMM:VM1A", "SAMM:VM1B", "SAMM:VM3A", "SAMM:VM3B"],
+            "levels": {
+              "level_0": "There is no security response process.",
+              "level_1": "Security response follows an ad-hoc process.",
+              "level_2": "Security response follows a team-defined process.",
+              "level_3": "Security response follows a defined process, being enforced and evaluated at the organizational level.",
+              "level_4": "Security response process is periodically evaluated by external and internal members for efficiency and adequacy to the goals."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-CFGM",
+        "name": "Configuration Management",
+        "description": "Software asset inventories, third-party repositories, asset integrity control, SBOM production, deployed assets inventory, test case and source code repositories, and change management.",
+        "practices": [
+          {
+            "id": "PRA-CS-CFGM-01",
+            "name": "Create and Maintain a Software Asset Inventory",
+            "description": "Identification and maintenance of important software assets from security and other perspectives.",
+            "references": ["BSIMM:SM3.1", "DEVSECOPS:Dev7.2"],
+            "levels": {
+              "level_0": "No software asset inventory is explicitly maintained.",
+              "level_1": "External dependencies are managed explicitly.",
+              "level_2": "External and internal dependencies, all the generated assets and configurations are managed in an asset inventory specific for each team.",
+              "level_3": "Asset inventory is defined and maintained at an organizational level. This inventory is periodically tested for integrity.",
+              "level_4": "Asset inventory is analyzed from a risk management perspective and integrating possible actions for future outcomes. New additions to the inventory are defined based on predictive analysis."
+            }
+          },
+          {
+            "id": "PRA-CS-CFGM-02",
+            "name": "Create and Maintain a 3rd Party Asset Repository",
+            "description": "Management and verification of third-party assets through an organizational repository.",
+            "references": ["DEVSECOPS:Dev7.4"],
+            "levels": {
+              "level_0": "3rd party assets are not explicitly managed.",
+              "level_1": "3rd party assets are integrated into the solution with a manual explicit dependency.",
+              "level_2": "3rd party assets are integrated into the solutions with an automated and orchestrated process.",
+              "level_3": "3rd party assets are being added to a specific repository where only verified assets are included. The process for including new assets is orchestrated and validated by different authorities in the organization.",
+              "level_4": "3rd party assets are analyzed periodically for integrity. New additions are considered before usage."
+            }
+          },
+          {
+            "id": "PRA-CS-CFGM-03",
+            "name": "Control the Integrity of Assets from Creation to End-of-Life",
+            "description": "Integrity verification of assets throughout their lifecycle.",
+            "references": ["BSIMM:AM3.3"],
+            "levels": {
+              "level_0": "No specific integrity checks are put in place.",
+              "level_1": "Only internal assets are maintained for integrity. Processes are manual.",
+              "level_2": "Internal and external assets are managed for integrity. Processes for this check are automated.",
+              "level_3": "Organization defines a set of goals for integrity checks and creates orchestration processes for guaranteeing it.",
+              "level_4": "Application and infrastructure monitoring processes are used across all the environments. Integrity is maintained and evolved for future outcomes."
+            }
+          },
+          {
+            "id": "PRA-CS-CFGM-04",
+            "name": "Produce a Software Bill of Materials (SBOM)",
+            "description": "Production of SBOM through automated processes.",
+            "references": ["BSIMM:SE3.6", "DEVSECOPS:Dev4.2"],
+            "levels": {
+              "level_0": "No SBOM is produced.",
+              "level_1": "SBOM is not possible but external dependencies are explicitly managed.",
+              "level_2": "SBOM is produced through automated processes, focused on the specifics of one product.",
+              "level_3": "There is an organizational definition for how to build a SBOM. Large majority of products are able to automatically produce a SBOM.",
+              "level_4": "SBOM produced and the processes that generate them are periodically evaluated and the feedback is integrated into the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-CFGM-05",
+            "name": "Create and Maintain a Deployed Assets Inventory",
+            "description": "Tracking of deployed assets including chain of custody verification.",
+            "references": ["BSIMM:CMVM2.3", "BSIMM:CMVM3.6", "DEVSECOPS:Dev7.9"],
+            "levels": {
+              "level_0": "No information on deployed assets is maintained.",
+              "level_1": "Information on deployed assets is not consistent and produced when needed.",
+              "level_2": "Deployed assets are registered and explicitly managed through orchestration processes.",
+              "level_3": "Deployed assets are verified for its origin and periodically evaluated for issues.",
+              "level_4": "All deployed assets are maintained in internal inventories with integrity and chain of custody check."
+            }
+          },
+          {
+            "id": "PRA-CS-CFGM-06",
+            "name": "Create, Use and Maintain a Test Case Repository",
+            "description": "Registration and management of manual and automated test cases with traceability.",
+            "references": ["DEVSECOPS:Dev7.3"],
+            "levels": {
+              "level_0": "No registration of test cases is made.",
+              "level_1": "Only manual test cases are registered.",
+              "level_2": "Manual and automated test cases are registered and can be traced back to requirements.",
+              "level_3": "All manual and automated testing cases are explicitly managed with bidirectional traceability being explicitly shown. A periodical regression testing can be easily deployed.",
+              "level_4": "All test cases are analysed for coverage. Execution status is communicated across the organization. Known patterns are identified and monitored in those test cases."
+            }
+          },
+          {
+            "id": "PRA-CS-CFGM-07",
+            "name": "Create, Use and Maintain a Source Code Repository",
+            "description": "Source code management with branching strategies and organizational consistency.",
+            "references": ["DEVSECOPS:Dev7.1"],
+            "levels": {
+              "level_0": "No source code repository is used.",
+              "level_1": "Only internal source code is maintained in code repository.",
+              "level_2": "Along with the code in the repository, also exists a branching strategy.",
+              "level_3": "Organization defines rules for setting up a source code repository. All possible branching strategies are centrally defined and enforced. Specific metrics are used across these repositories.",
+              "level_4": "Organization performs periodic analysis on the repositories to check for consistency and for defining new ways of working."
+            }
+          },
+          {
+            "id": "PRA-CS-CFGM-08",
+            "name": "Define, Use and Maintain a Change Management System",
+            "description": "Registration of all changes with auditable information, accountability and traceability.",
+            "references": ["DEVSECOPS:Dev4.4"],
+            "levels": {
+              "level_0": "No change management system is defined.",
+              "level_1": "Change management is managed when it occurs in an ad-hoc process.",
+              "level_2": "Changes are managed inside the team with a managed process.",
+              "level_3": "Changes are managed consistently across the organization.",
+              "level_4": "Changes are managed by a defined process and evaluated periodically for understanding variation and patterns."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-CI",
+        "name": "Continuous Integration",
+        "description": "Continuous integration capability, build process definition, and verifiable sources management.",
+        "practices": [
+          {
+            "id": "PRA-CS-CI-01",
+            "name": "Continuous Integration Capability",
+            "description": "The team's ability to perform continuous integration with automated triggering and orchestration.",
+            "references": ["DEVSECOPS:Dev6.1"],
+            "levels": {
+              "level_0": "No continuous integration capability exists.",
+              "level_1": "Continuous integration exists but is not completely automated. Integration needs to be manually triggered.",
+              "level_2": "Continuous integration exists, can be automatically triggered and is orchestrated for addressing a set of goals.",
+              "level_3": "Continuous integration is part of a consistent process defined for the organization. Control gates are based on quality metrics. Outcomes are produced automatically.",
+              "level_4": "Continuous integration is periodically evaluated for analyzing the impact in business outcomes. Feedback is integrated into the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-CI-02",
+            "name": "Define, Use and Maintain a Build Process",
+            "description": "Build process automation from manual to fully automated and organizational.",
+            "references": ["DEVSECOPS:Dev7.13", "DEVSECOPS:Dev6.1"],
+            "levels": {
+              "level_0": "Build process is manual, not defined.",
+              "level_1": "Build process is manual, with a written definition.",
+              "level_2": "Build process is part of the pipeline.",
+              "level_3": "Build process is completely automated and consistent across the organization.",
+              "level_4": "Build process is periodically evaluated for producing results. Feedback is incorporated into the SDLC."
+            }
+          },
+          {
+            "id": "PRA-CS-CI-03",
+            "name": "Define, Use and Maintain a Process for Using Only Verifiable Sources",
+            "description": "Verification of all sources used in the build and integration process.",
+            "references": ["DEVSECOPS:Dev6.2"],
+            "levels": {
+              "level_0": "Sources are used without any verification other than functional.",
+              "level_1": "Sources are evaluated for functionality but in ad-hoc process.",
+              "level_2": "The team defines a process for evaluating all the sources being used.",
+              "level_3": "The organization defines a set of trusted external sources and implements a periodic verification for checking the usage.",
+              "level_4": "The different external sources are monitored and periodically analyzed for analyzing risks and predicting outcomes."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-QADSO",
+        "name": "Quality Assurance (DevSecOps)",
+        "description": "Static analysis tools usage, independent quality reviews, code quality evaluation, quality metrics, and global testing strategy in a DevSecOps context.",
+        "practices": [
+          {
+            "id": "PRA-CS-QADSO-01",
+            "name": "Use Static Analysis Tools",
+            "description": "Team's ability to use static analysis tools for code analysis.",
+            "references": ["DEVSECOPS:Dev4.3"],
+            "levels": {
+              "level_0": "No static analysis tools are used.",
+              "level_1": "Static analysis tools are used for code analysis but in an ad-hoc process, by decision of individual contributors.",
+              "level_2": "Static analysis tools are defined for the team with a set of rules.",
+              "level_3": "Static analysis tools are part of the defined pipeline by the organization. Automated processes are defined and used for integrating these tools.",
+              "level_4": "The output of the static analysis tools is periodically analyzed for improvement identification."
+            }
+          },
+          {
+            "id": "PRA-CS-QADSO-02",
+            "name": "Define, Use and Maintain an Independent Quality Assurance Review or Audit",
+            "description": "Independent quality reviews or audits for ensuring unbiased quality assessment.",
+            "references": ["DEVSECOPS:GOV6.7"],
+            "levels": {
+              "level_0": "No independent quality review or audit is performed.",
+              "level_1": "Independent audit or reviews are executed in an ad-hoc manner, by request of individual contributors.",
+              "level_2": "The team defines and enforces a process for executing independent audit or review.",
+              "level_3": "The organization defines a process for all the teams to use independent audits or reviews and the results are communicated to everyone.",
+              "level_4": "The results from the independent audit or reviews are periodically analyzed for detecting patterns and to predict which changes are needed based on the necessary outcomes."
+            }
+          },
+          {
+            "id": "PRA-CS-QADSO-03",
+            "name": "Evaluate Code Quality Against Coding Standards",
+            "description": "Evaluation of code quality when compared with coding standards.",
+            "references": ["DEVSECOPS:Dev5.1"],
+            "levels": {
+              "level_0": "There are no coding standards.",
+              "level_1": "Code is evaluated based on the individual contributors experience.",
+              "level_2": "100% of the code produced is reviewed and compared with the code standard, which was defined by the team.",
+              "level_3": "The organization defines a coding standard and a process for evaluating it across the organization.",
+              "level_4": "The results from the code reviews are periodically reviewed and analyzed for improvement."
+            }
+          },
+          {
+            "id": "PRA-CS-QADSO-04",
+            "name": "Define, Use and Maintain Quality-Related Metrics",
+            "description": "Test coverage metrics, requirements traceability, and quality evaluation metrics.",
+            "references": ["DEVSECOPS:TES4", "DEVSECOPS:TES3.4"],
+            "levels": {
+              "level_0": "There are no useful metrics for understanding work quality.",
+              "level_1": "Some metrics are defined but they are collected by ad-hoc or manual processes.",
+              "level_2": "Team defines a set of quality metrics with an automated process for collecting them. A simple analysis is made for those metrics.",
+              "level_3": "The organization builds a quality metric repository where each metric is characterized for its collection, computation and analysis. The organization enforces the usage of this repository.",
+              "level_4": "The collected metrics are periodically analyzed for building and updating performance models for each one of those metrics."
+            }
+          },
+          {
+            "id": "PRA-CS-QADSO-05",
+            "name": "Define, Use and Maintain a Global Testing Strategy",
+            "description": "Definition of test cases, execution, and collection of results for both automated and manual tests.",
+            "references": ["DEVSECOPS:TES1.1", "DEVSECOPS:TES1.2", "DEVSECOPS:TES7.1", "DEVSECOPS:TES7.2"],
+            "levels": {
+              "level_0": "No testing strategy is defined. Testing is not done or done without a guiding line.",
+              "level_1": "No testing strategy is defined. Individual contributors define the testing coverage and strategy needed.",
+              "level_2": "The team has a testing strategy based on a set of goals and metrics, which are collected manually.",
+              "level_3": "The organization defines a testing strategy based on a set of quality metrics and outcomes. This strategy is enforced on every team in order to identify deviations.",
+              "level_4": "Testing strategy is periodically reviewed and analyzed for determining improvement opportunities into the SDLC."
+            }
+          }
+        ]
+      },
+      {
+        "id": "CAP-CS-CD",
+        "name": "Continuous Delivery",
+        "description": "Capability to restore products to stable state upon failure.",
+        "practices": [
+          {
+            "id": "PRA-CS-CD-01",
+            "name": "Define, Use and Maintain a Process for Product Restoration",
+            "description": "Process for restoring a product to a known stable state when a product failure occurs.",
+            "references": ["DEVSECOPS:DEL4"],
+            "levels": {
+              "level_0": "No restore procedure is available.",
+              "level_1": "A restore procedure is available but it needs manual intervention and done by specific people in the team. Restoration is made with probable data loss.",
+              "level_2": "A manual restore procedure is available with probable data loss. No specific team member is needed.",
+              "level_3": "An automated restore procedure is available, with data loss prevention.",
+              "level_4": "Automated restore procedure is available and it is periodically reviewed for improvements. Its feedback is included in the SDLC."
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "source": "PRA-CS-GOV-01",
+        "relation": "requires",
+        "target": "PRA-CS-GOV-03",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "A security strategy presupposes the existence of a security policy framework that defines the foundational rules and processes."
+      },
+      {
+        "source": "PRA-CS-GOV-03",
+        "relation": "requires",
+        "target": "PRA-CS-GOV-06",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Metrics must be anchored to a defined strategy; without strategic objectives, metrics lack alignment and purpose."
+      },
+      {
+        "source": "PRA-CS-GOV-02",
+        "relation": "requires",
+        "target": "PRA-CS-GOV-05",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Security-focused profiles (roles, satellites, CoE) require a competency base established through knowledge and skills development."
+      },
+      {
+        "source": "PRA-CS-GOV-04",
+        "relation": "suggests",
+        "target": "PRA-CS-GOV-06",
+        "type": "Optional",
+        "scope": "Intra-Capability",
+        "rationale": "Visibility is enhanced by metrics, but basic visibility can be achieved through simpler communication mechanisms without a formal metrics catalog."
+      },
+      {
+        "source": "PRA-CS-GOV-07",
+        "relation": "suggests",
+        "target": "PRA-CS-GOV-08",
+        "type": "Optional",
+        "scope": "Intra-Capability",
+        "rationale": "Knowledge of PII usage supports compliance monitoring, but compliance can be monitored independently through regulatory obligation tracking."
+      },
+      {
+        "source": "PRA-CS-GOV-03",
+        "relation": "requires",
+        "target": "PRA-CS-RISK-01",
+        "type": "Mandatory",
+        "scope": "Cross-Capability",
+        "rationale": "The security strategy frames the organizational approach to risk management; risk evaluation must be grounded in strategic direction."
+      },
+      {
+        "source": "PRA-CS-RISK-01",
+        "relation": "requires",
+        "target": "PRA-CS-RISK-02",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Risk-based release gating presupposes that a risk evaluation framework and risk identification process already exist."
+      },
+      {
+        "source": "PRA-CS-RISK-04",
+        "relation": "requires",
+        "target": "PRA-CS-RISK-05",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Threat evaluation systems rely on a prior identification of the vulnerability and attacker landscape to define threat models and abuse cases."
+      },
+      {
+        "source": "PRA-CS-RISK-01",
+        "relation": "requires",
+        "target": "PRA-CS-REQ-01",
+        "type": "Mandatory",
+        "scope": "Cross-Capability",
+        "rationale": "Risk assessment informs which regulatory requirements are prioritized and how they are translated into actionable system requirements."
+      },
+      {
+        "source": "PRA-CS-RISK-03",
+        "relation": "suggests",
+        "target": "PRA-CS-TECH-02",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "SCA can verify that external providers' components meet contractual security obligations, but the contract itself is enforceable without SCA tooling."
+      },
+      {
+        "source": "PRA-CS-REQ-02",
+        "relation": "requires",
+        "target": "PRA-CS-TECH-01",
+        "type": "Mandatory",
+        "scope": "Cross-Capability",
+        "rationale": "Security-by-design components and services cannot be selected without first having defined what security features are required."
+      },
+      {
+        "source": "PRA-CS-REQ-01",
+        "relation": "requires",
+        "target": "PRA-CS-QA-04",
+        "type": "Mandatory",
+        "scope": "Cross-Capability",
+        "rationale": "Work audit policies must be grounded in the regulatory obligations that define what needs to be verified and complied with."
+      },
+      {
+        "source": "PRA-CS-REQ-01",
+        "relation": "requires",
+        "target": "PRA-CS-STEST-01",
+        "type": "Mandatory",
+        "scope": "Cross-Capability",
+        "rationale": "Security verification strategies must be grounded in regulatory needs that define the compliance and security requirements to be tested."
+      },
+      {
+        "source": "PRA-CS-REQ-02",
+        "relation": "requires",
+        "target": "PRA-CS-TECH-03",
+        "type": "Mandatory",
+        "scope": "Cross-Capability",
+        "rationale": "Technical capability development for security features requires a prior definition of which security features need to be supported."
+      },
+      {
+        "source": "PRA-CS-TECH-01",
+        "relation": "suggests",
+        "target": "PRA-CS-TECH-04",
+        "type": "Optional",
+        "scope": "Intra-Capability",
+        "rationale": "A technology-focused security standard benefits from having defined security-by-design components, but standards can be developed from regulatory needs alone."
+      },
+      {
+        "source": "PRA-CS-QA-01",
+        "relation": "suggests",
+        "target": "PRA-CS-QA-03",
+        "type": "Optional",
+        "scope": "Intra-Capability",
+        "rationale": "Static analysis tools augment manual code reviews, but manual reviews can stand alone as a quality practice."
+      },
+      {
+        "source": "PRA-CS-QA-02",
+        "relation": "suggests",
+        "target": "PRA-CS-TECH-04",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "Architecture review against security standards benefits from a defined technology security standard, but reviews can use regulation needs directly."
+      },
+      {
+        "source": "PRA-CS-STEST-01",
+        "relation": "requires",
+        "target": "PRA-CS-STEST-02",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Specific security tests implement the broader security verification strategy; tests without strategic alignment lack coherence."
+      },
+      {
+        "source": "PRA-CS-STEST-01",
+        "relation": "requires",
+        "target": "PRA-CS-STEST-03",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Communication of results requires that a testing strategy exists and that tests have been executed to produce results."
+      },
+      {
+        "source": "PRA-CS-STEST-01",
+        "relation": "requires",
+        "target": "PRA-CS-STEST-04",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Setting testing objectives requires a verification strategy as the foundation for defining measurable goals."
+      },
+      {
+        "source": "PRA-CS-STEST-02",
+        "relation": "suggests",
+        "target": "PRA-CS-PTEST-01",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "Penetration testing complements functional security testing at a different abstraction level but is not a prerequisite."
+      },
+      {
+        "source": "PRA-CS-PTEST-01",
+        "relation": "requires",
+        "target": "PRA-CS-PTEST-02",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Penetration test results communication requires that penetration tests have been defined and executed."
+      },
+      {
+        "source": "PRA-CS-PTEST-01",
+        "relation": "requires",
+        "target": "PRA-CS-PTEST-03",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Penetration testing coverage objectives require a defined set of penetration tests as the foundation."
+      },
+      {
+        "source": "PRA-CS-OPSEC-01",
+        "relation": "requires",
+        "target": "PRA-CS-OPSEC-02",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Integrity protection of deployed assets relies on a controlled deployment environment being defined and enforced."
+      },
+      {
+        "source": "PRA-CS-OPSEC-04",
+        "relation": "requires",
+        "target": "PRA-CS-OPSEC-05",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Registration and management of security problems requires monitoring capability to detect those problems in the first place."
+      },
+      {
+        "source": "PRA-CS-OPSEC-06",
+        "relation": "requires",
+        "target": "PRA-CS-OPSEC-07",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "A security event response process requires defined roles and responsibilities before procedures can be effectively implemented."
+      },
+      {
+        "source": "PRA-CS-OPSEC-03",
+        "relation": "suggests",
+        "target": "PRA-CS-OPSEC-01",
+        "type": "Optional",
+        "scope": "Intra-Capability",
+        "rationale": "Infrastructure adaptation to security levels enhances secure deployment configuration but is not strictly required for base-level deployment security."
+      },
+      {
+        "source": "PRA-CS-OPSEC-05",
+        "relation": "suggests",
+        "target": "PRA-CS-RISK-06",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "Operational incident data feeds the maintenance of the top-N security issues list, but the issues list can also be informed by external intelligence."
+      },
+      {
+        "source": "PRA-CS-CFGM-01",
+        "relation": "requires",
+        "target": "PRA-CS-CFGM-03",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Asset integrity control requires a known inventory of assets; you cannot verify integrity of unknown assets."
+      },
+      {
+        "source": "PRA-CS-CFGM-01",
+        "relation": "requires",
+        "target": "PRA-CS-CFGM-04",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "SBOM production aggregates asset information that must first be catalogued in a software asset inventory."
+      },
+      {
+        "source": "PRA-CS-CFGM-07",
+        "relation": "requires",
+        "target": "PRA-CS-CFGM-08",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Change management tracks changes to artifacts that must be version-controlled in a source code repository."
+      },
+      {
+        "source": "PRA-CS-CFGM-02",
+        "relation": "requires",
+        "target": "PRA-CS-CI-03",
+        "type": "Mandatory",
+        "scope": "Cross-Capability",
+        "rationale": "Verifiable sources in CI require a managed 3rd party asset repository to validate provenance and integrity of external dependencies."
+      },
+      {
+        "source": "PRA-CS-CFGM-06",
+        "relation": "suggests",
+        "target": "PRA-CS-QADSO-05",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "A global testing strategy benefits from a managed test case repository, but strategies can be defined independently at a conceptual level."
+      },
+      {
+        "source": "PRA-CS-CI-02",
+        "relation": "requires",
+        "target": "PRA-CS-CI-01",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Continuous integration orchestrates build processes; the build process must be defined before CI can automate it."
+      },
+      {
+        "source": "PRA-CS-CI-01",
+        "relation": "suggests",
+        "target": "PRA-CS-QA-03",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "CI provides the automation backbone for running SAST tools, but SAST can be executed outside a CI pipeline."
+      },
+      {
+        "source": "PRA-CS-CI-01",
+        "relation": "suggests",
+        "target": "PRA-CS-QADSO-01",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "CI facilitates the integration of static analysis tools into the development pipeline, but static analysis can be performed independently."
+      },
+      {
+        "source": "PRA-CS-QADSO-03",
+        "relation": "suggests",
+        "target": "PRA-CS-QA-01",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "Code quality evaluation against coding standards complements code reviews with an objective, standards-based perspective."
+      },
+      {
+        "source": "PRA-CS-QADSO-04",
+        "relation": "suggests",
+        "target": "PRA-CS-GOV-06",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "Quality-related metrics can feed into security-focused metrics, providing an integrated view of process quality and security posture."
+      },
+      {
+        "source": "PRA-CS-CFGM-01",
+        "relation": "requires",
+        "target": "PRA-CS-CFGM-05",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Deployed assets inventory requires a baseline software asset inventory from which deployment tracking is derived."
+      },
+      {
+        "source": "PRA-CS-OPSEC-01",
+        "relation": "suggests",
+        "target": "PRA-CS-CD-01",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "Product restoration benefits from a known secure deployment configuration to define the target stable state, but can operate with basic rollback mechanisms."
+      },
+      {
+        "source": "PRA-CS-TECH-02",
+        "relation": "suggests",
+        "target": "PRA-CS-CFGM-04",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "SCA tools generate dependency data that enriches SBOM production, but SBOM can be produced through other composition mechanisms."
+      },
+      {
+        "source": "PRA-CS-GOV-01",
+        "relation": "requires",
+        "target": "PRA-CS-GOV-08",
+        "type": "Mandatory",
+        "scope": "Intra-Capability",
+        "rationale": "Compliance guards monitor adherence to the security policy; without a defined policy, there is nothing against which to measure compliance."
+      },
+      {
+        "source": "PRA-CS-RISK-04",
+        "relation": "suggests",
+        "target": "PRA-CS-RISK-06",
+        "type": "Optional",
+        "scope": "Intra-Capability",
+        "rationale": "Identified vulnerabilities and attack patterns inform the prioritization of the top security issues list, but the list can also be informed by external intelligence and community knowledge."
+      },
+      {
+        "source": "PRA-CS-STEST-03",
+        "relation": "suggests",
+        "target": "PRA-CS-PTEST-02",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "Aligned communication practices for security testing and penetration testing results enable a unified organizational view, but each can be communicated independently."
+      },
+      {
+        "source": "PRA-CS-CFGM-05",
+        "relation": "suggests",
+        "target": "PRA-CS-OPSEC-04",
+        "type": "Optional",
+        "scope": "Cross-Capability",
+        "rationale": "A deployed assets inventory provides context for monitoring, helping identify what should be monitored, but monitoring can proceed based on infrastructure discovery."
+      }
+    ],
+    "relationships_summary": {
+      "total": 45,
+      "mandatory": 26,
+      "optional": 19,
+      "contradicts": 0,
+      "intra_capability": 25,
+      "cross_capability": 20
+    }
+  }
+}

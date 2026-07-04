@@ -1,0 +1,553 @@
+{
+  "domain_id": "DOM-CS",
+  "domain_name": "Cybersecurity",
+  "version": "1.0.0",
+  "question_tiers": {
+    "tier_1_organizational_context_modifiers": {
+      "description": "Questions establishing organizational context and constraints. These are always asked first to frame the negotiation boundaries for all subsequent maturity discovery. Answers steer dimension targets, compliance floors, and trade-off weighting across all 12 capabilities.",
+      "questions": [
+        {
+          "id": "OCM-01",
+          "question": "How would you describe your organization's business volatility (e.g., frequency of strategic or operational changes)?",
+          "purpose": "Estimates the stability of processes and how often maturity practices may need adaptation. High volatility favours adaptive, lightweight practices over rigid organizational mandates.",
+          "response_type": "Single-choice",
+          "options": ["Low", "Moderate", "High"],
+          "refines": "Management dimension stability; weighting on proactive vs. predictive approach targets",
+          "next_step_logic": "High volatility lowers the ceiling on Management (Optimized may be unrealistic) and increases weight on Approach (Proactive becomes more valuable than Predictive). Low volatility enables full Predictive/Optimized targets."
+        },
+        {
+          "id": "OCM-02",
+          "question": "How critical is cybersecurity for achieving your core business goals?",
+          "purpose": "Determines how preventive or proactive the organization should aim to be. Directly sets the ambition level for the Main Approach dimension.",
+          "response_type": "Single-choice",
+          "options": ["Low", "Medium", "High"],
+          "refines": "Upper maturity target for the Approach dimension across all capabilities",
+          "next_step_logic": "High criticality sets the Approach ceiling at Predictive (Level 4). Medium targets Proactive (Level 3). Low allows Reactive (Level 2) as an acceptable operational state."
+        },
+        {
+          "id": "OCM-03",
+          "question": "What is your organization's risk appetite in the context of cybersecurity investments?",
+          "purpose": "Indicates tolerance for risk and adjusts the trade-off between investment cost and maturity target during the negotiation phase.",
+          "response_type": "Single-choice",
+          "options": ["Risk-Averse", "Balanced", "Risk-Tolerant"],
+          "refines": "Adjusts negotiation weighting in maturity optimization; influences capability selection breadth",
+          "next_step_logic": "Risk-Averse pushes all capabilities toward higher levels and broadens the set of mandatory capabilities. Risk-Tolerant allows selective investment in fewer capabilities at higher levels. Balanced uses the default dependency-driven selection."
+        },
+        {
+          "id": "OCM-04",
+          "question": "Which regulatory frameworks apply to your operations?",
+          "purpose": "Defines the minimum mandatory maturity level in relevant domains. Regulatory compliance establishes a non-negotiable floor.",
+          "response_type": "Multi-choice",
+          "options": ["NIS2", "ISO/IEC 27001", "GDPR", "PCI-DSS", "SOC 2", "DORA", "Sector-specific regulation", "None explicitly identified"],
+          "refines": "Establishes compliance floor; activates mandatory practices in Governance (PRA-CS-GOV-08), Requirements (PRA-CS-REQ-01), and Risk Management (PRA-CS-RISK-01)",
+          "next_step_logic": "Each selected framework maps to a minimum maturity level for specific practices. NIS2 requires at least Level 3 in Governance, Risk Management, and Operational Security. ISO 27001 requires at least Level 3 across all capabilities. If none selected, compliance floor defaults to Level 0 (no constraint)."
+        },
+        {
+          "id": "OCM-05",
+          "question": "How would you characterize your Software Development Lifecycle (SDLC) definition and formality?",
+          "purpose": "Evaluates process maturity baseline, impacting the Execution Scope dimension and setting feasibility constraints for practices that require organizational-level enforcement.",
+          "response_type": "Single-choice",
+          "options": ["Undefined", "Basic", "Formal", "Integrated"],
+          "refines": "Sets dependency constraints for SDLC-integrated practices; bounds Execution Scope dimension",
+          "next_step_logic": "Undefined caps Scope at Individual for all practices. Basic allows Team-level scope. Formal enables Organizational scope. Integrated enables Predictive approach for SDLC-embedded practices (Security Testing, CI, CD)."
+        },
+        {
+          "id": "OCM-06",
+          "question": "How many development teams does your organization have, and how autonomous are they in defining their own processes?",
+          "purpose": "Determines whether organizational-level practices are feasible or whether the model should emphasize team-level maturity. Directly influences the Scope dimension targets.",
+          "response_type": "Single-choice",
+          "options": ["Single team or very small organization", "Multiple teams with high autonomy", "Multiple teams with some central coordination", "Multiple teams with centralized governance"],
+          "refines": "Scope dimension; feasibility of organizational-level practices (Level 3-4)",
+          "next_step_logic": "Single team makes organizational scope equivalent to team scope — Level 3 practices are achievable but framed as team practices. High autonomy teams cap many practices at Level 2 unless a coordination mechanism exists. Centralized governance enables full Level 3-4 targets."
+        },
+        {
+          "id": "OCM-07",
+          "question": "Does your organization rely on external providers for software development, infrastructure, or security services?",
+          "purpose": "Determines relevance and priority of supply-chain security practices. Directly activates or deprioritizes practices in Risk Management (PRA-CS-RISK-03), Configuration Management (PRA-CS-CFGM-02), and CI (PRA-CS-CI-03).",
+          "response_type": "Single-choice",
+          "options": ["No external providers", "Some outsourcing but mostly internal", "Significant reliance on external providers", "Primarily outsourced development/infrastructure"],
+          "refines": "Activates PRA-CS-RISK-03, PRA-CS-CFGM-02, PRA-CS-CI-03; adjusts their maturity targets proportionally",
+          "next_step_logic": "No external providers marks PRA-CS-RISK-03 as not applicable and deprioritizes PRA-CS-CFGM-02. Significant/primary reliance elevates these to mandatory with Level 3 minimum target."
+        },
+        {
+          "id": "OCM-08",
+          "question": "Does your organization process personal data (PII) as part of its products or services?",
+          "purpose": "Determines the relevance and priority of PII-related practices in Governance.",
+          "response_type": "Single-choice",
+          "options": ["No", "Yes, limited scope", "Yes, extensively"],
+          "refines": "Activates PRA-CS-GOV-07 (PII Inventory); adjusts GDPR-related compliance floor",
+          "next_step_logic": "No marks PRA-CS-GOV-07 as not applicable. Limited scope sets a minimum Level 2 target. Extensive processing sets a minimum Level 3 target and triggers a follow-up question on data protection officer existence."
+        },
+        {
+          "id": "OCM-09",
+          "question": "What is the primary deployment model for your software products?",
+          "purpose": "Determines the relevance and maturity targets for Operational Security practices, particularly infrastructure adaptation and deployment configuration.",
+          "response_type": "Single-choice",
+          "options": ["On-premise only", "Hybrid (on-premise and cloud)", "Cloud-native", "SaaS/multi-tenant"],
+          "refines": "Sets context for PRA-CS-OPSEC-01, PRA-CS-OPSEC-03, PRA-CS-OPSEC-04",
+          "next_step_logic": "On-premise caps PRA-CS-OPSEC-03 at Level 0. Cloud-native/SaaS elevates PRA-CS-OPSEC-03 and PRA-CS-OPSEC-04 to minimum Level 3 targets. Hybrid requires Level 2 minimum across operational security."
+        },
+        {
+          "id": "OCM-10",
+          "question": "How would you rate the overall cybersecurity knowledge and experience of your development and operations teams?",
+          "purpose": "Sets the baseline for the Knowledge dimension across all capabilities and determines the urgency of Governance training practices.",
+          "response_type": "Single-choice",
+          "options": ["Minimal awareness", "Basic awareness but limited hands-on experience", "Proficient in core security practices", "Deep expertise with specialized security roles"],
+          "refines": "Knowledge dimension baseline; priority of PRA-CS-GOV-02 (training); feasibility of Level 3-4 targets",
+          "next_step_logic": "Minimal awareness caps Knowledge at Aware (Level 1) and elevates PRA-CS-GOV-02 to high priority. Proficient enables Level 3 targets. Deep expertise enables Level 4 and reduces priority of training practices."
+        }
+      ]
+    },
+    "tier_2_core_maturity_discovery": {
+      "description": "Adaptive questions aligned with the four maturity dimensions (Approach, Execution Scope, Knowledge, Management) and explicitly linked to specific capabilities and practices. The SLM selects questions dynamically based on Tier 1 answers and prior Tier 2 responses, optimizing for maximum information gain regarding uncertain maturity dimensions or dependencies.",
+      "capability_questions": [
+        {
+          "capability_id": "CAP-CS-GOV",
+          "capability_name": "Governance",
+          "questions": [
+            {
+              "id": "CMD-GOV-01",
+              "practice_id": "PRA-CS-GOV-01",
+              "question": "Does your organization have a documented security policy or a set of security-related working agreements?",
+              "purpose": "Determines whether a foundational security policy exists and at what level of formalization.",
+              "response_type": "Single-choice",
+              "options": ["No", "Informal/team-level agreements", "Documented team process", "Organization-wide enforced policy"],
+              "refines": "Management (Not Managed → Managed); Scope (Individual → Organizational)",
+              "level_mapping": {"No": 0, "Informal/team-level agreements": 1, "Documented team process": 2, "Organization-wide enforced policy": 3}
+            },
+            {
+              "id": "CMD-GOV-02",
+              "practice_id": "PRA-CS-GOV-01",
+              "question": "Is the security policy or process continuously monitored and adjusted based on data or prediction models?",
+              "purpose": "Distinguishes Level 3 (organizational enforcement) from Level 4 (predictive adjustment).",
+              "response_type": "Single-choice",
+              "options": ["No monitoring", "Basic periodic review", "Data-driven continuous adjustment"],
+              "refines": "Approach (Proactive → Predictive)",
+              "level_mapping": {"No monitoring": "<=2", "Basic periodic review": 3, "Data-driven continuous adjustment": 4},
+              "conditional": "Only asked if CMD-GOV-01 >= 'Organization-wide enforced policy'"
+            },
+            {
+              "id": "CMD-GOV-03",
+              "practice_id": "PRA-CS-GOV-02",
+              "question": "How does your organization approach security awareness and training?",
+              "purpose": "Assesses the maturity of security knowledge development practices.",
+              "response_type": "Single-choice",
+              "options": ["No training exists", "Informal awareness events", "Ad-hoc Security Awareness Training identified by teams", "Organizational SAT plan including executives", "Planned SAT with team-specific training needs"],
+              "refines": "Knowledge (Aware → Proficient → Mastered); Scope (Individual → Organizational)",
+              "level_mapping": {"No training exists": 0, "Informal awareness events": 1, "Ad-hoc Security Awareness Training identified by teams": 2, "Organizational SAT plan including executives": 3, "Planned SAT with team-specific training needs": 4}
+            },
+            {
+              "id": "CMD-GOV-04",
+              "practice_id": "PRA-CS-GOV-03",
+              "question": "Is there a defined security strategy that integrates security practices into the SDLC?",
+              "purpose": "Determines whether security is strategically embedded in the development lifecycle.",
+              "response_type": "Single-choice",
+              "options": ["No strategy exists", "Some goals identified", "Team-level goals and practices defined for SDLC", "Organization defines mandatory/optional SDLC security practices", "Organization analyzes and adjusts SDLC practices based on outcomes"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No strategy exists": 0, "Some goals identified": 1, "Team-level goals and practices defined for SDLC": 2, "Organization defines mandatory/optional SDLC security practices": 3, "Organization analyzes and adjusts SDLC practices based on outcomes": 4}
+            },
+            {
+              "id": "CMD-GOV-05",
+              "practice_id": "PRA-CS-GOV-05",
+              "question": "Does your organization have dedicated security roles (e.g., security champions, a Security Center of Competence)?",
+              "purpose": "Assesses the existence and maturity of security-focused organizational profiles.",
+              "response_type": "Single-choice",
+              "options": ["No specific roles", "Some individuals are informally recognized", "Team-designated security members", "Organizational Security CoC with team satellites", "CoC and satellites actively driving improvements"],
+              "refines": "Scope (Individual → Organizational); Knowledge (Aware → Mastered)",
+              "level_mapping": {"No specific roles": 0, "Some individuals are informally recognized": 1, "Team-designated security members": 2, "Organizational Security CoC with team satellites": 3, "CoC and satellites actively driving improvements": 4}
+            },
+            {
+              "id": "CMD-GOV-06",
+              "practice_id": "PRA-CS-GOV-06",
+              "question": "Does your organization define and collect security-focused metrics?",
+              "purpose": "Determines whether security performance is measured and how metrics feed back into the process.",
+              "response_type": "Single-choice",
+              "options": ["No metrics", "Inconsistent collection", "Team-defined metrics with known definitions", "Organizational metrics catalog with per-team analysis", "Org-level analysis with SDLC feedback integration"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No metrics": 0, "Inconsistent collection": 1, "Team-defined metrics with known definitions": 2, "Organizational metrics catalog with per-team analysis": 3, "Org-level analysis with SDLC feedback integration": 4}
+            },
+            {
+              "id": "CMD-GOV-07",
+              "practice_id": "PRA-CS-GOV-08",
+              "question": "How does your organization handle compliance obligations?",
+              "purpose": "Determines the maturity of compliance monitoring from reactive to predictive.",
+              "response_type": "Single-choice",
+              "options": ["Compliance not considered", "Fully reactive", "Team identifies obligations and tasks", "Organizational compliance catalog with SDLC translation", "Monitored, enforced, and new regulations impact-assessed"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"Compliance not considered": 0, "Fully reactive": 1, "Team identifies obligations and tasks": 2, "Organizational compliance catalog with SDLC translation": 3, "Monitored, enforced, and new regulations impact-assessed": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-RISK",
+          "capability_name": "Risk Management",
+          "questions": [
+            {
+              "id": "CMD-RISK-01",
+              "practice_id": "PRA-CS-RISK-01",
+              "question": "Does your organization evaluate applications and data from a security risk perspective?",
+              "purpose": "Determines whether risk management exists and at what scope it operates.",
+              "response_type": "Single-choice",
+              "options": ["No risk management", "Risks identified but not properly handled", "Team-level risk identification and tasks", "Organizational risk strategy with application classification", "Organizational risk management with periodic SDLC-integrated analysis"],
+              "refines": "Approach (Reactive → Predictive); Scope (Individual → Organizational)",
+              "level_mapping": {"No risk management": 0, "Risks identified but not properly handled": 1, "Team-level risk identification and tasks": 2, "Organizational risk strategy with application classification": 3, "Organizational risk management with periodic SDLC-integrated analysis": 4}
+            },
+            {
+              "id": "CMD-RISK-02",
+              "practice_id": "PRA-CS-RISK-02",
+              "question": "Are security risks used as a formal decision point for releasing software?",
+              "purpose": "Assesses whether risk analysis gates the release process.",
+              "response_type": "Single-choice",
+              "options": ["Ad-hoc release decisions", "Some risks considered, no explicit criteria", "Team considers risks, no formal write-off", "Formal security write-off required", "Release risk analysis drives SDLC improvement"],
+              "refines": "Management (Not Managed → Optimized)",
+              "level_mapping": {"Ad-hoc release decisions": 0, "Some risks considered, no explicit criteria": 1, "Team considers risks, no formal write-off": 2, "Formal security write-off required": 3, "Release risk analysis drives SDLC improvement": 4}
+            },
+            {
+              "id": "CMD-RISK-03",
+              "practice_id": "PRA-CS-RISK-04",
+              "question": "Does your organization systematically identify potential attackers, attack patterns, and vulnerabilities?",
+              "purpose": "Determines the maturity of threat intelligence and vulnerability management.",
+              "response_type": "Single-choice",
+              "options": ["Not identified", "Only known vulnerabilities, ad-hoc", "Team-level product vulnerability identification", "Organizational catalog with attack patterns", "Per-stack probability analysis integrated into SDLC"],
+              "refines": "Approach (Reactive → Predictive); Knowledge (Aware → Mastered)",
+              "level_mapping": {"Not identified": 0, "Only known vulnerabilities, ad-hoc": 1, "Team-level product vulnerability identification": 2, "Organizational catalog with attack patterns": 3, "Per-stack probability analysis integrated into SDLC": 4}
+            },
+            {
+              "id": "CMD-RISK-04",
+              "practice_id": "PRA-CS-RISK-05",
+              "question": "Does your organization produce threat assessments or abuse cases for its projects?",
+              "purpose": "Assesses the maturity of systematic threat evaluation.",
+              "response_type": "Single-choice",
+              "options": ["No threat analysis", "Ad-hoc community-based analysis", "Per-project threat assessment and abuse cases", "Organizational enforcement with periodic evaluation", "Evaluation leads to SDLC control gate adjustments"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No threat analysis": 0, "Ad-hoc community-based analysis": 1, "Per-project threat assessment and abuse cases": 2, "Organizational enforcement with periodic evaluation": 3, "Evaluation leads to SDLC control gate adjustments": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-REQ",
+          "capability_name": "Requirements",
+          "questions": [
+            {
+              "id": "CMD-REQ-01",
+              "practice_id": "PRA-CS-REQ-01",
+              "question": "How does your organization manage regulatory requirements for its software products?",
+              "purpose": "Determines how regulatory needs are translated into actionable requirements.",
+              "response_type": "Single-choice",
+              "options": ["Not explicitly managed", "Isolated requirements in some systems", "Teams identify and translate per-product regulatory needs", "Organizational enforcement with cross-product integration", "Periodic review with impact analysis across products"],
+              "refines": "Scope (Individual → Organizational); Management (Not Managed → Optimized)",
+              "level_mapping": {"Not explicitly managed": 0, "Isolated requirements in some systems": 1, "Teams identify and translate per-product regulatory needs": 2, "Organizational enforcement with cross-product integration": 3, "Periodic review with impact analysis across products": 4}
+            },
+            {
+              "id": "CMD-REQ-02",
+              "practice_id": "PRA-CS-REQ-02",
+              "question": "Does your organization maintain a defined inventory of security features (e.g., authentication, authorization, encryption) with consistent technology choices?",
+              "purpose": "Determines whether security features are managed as reusable organizational assets.",
+              "response_type": "Single-choice",
+              "options": ["No classification exists", "Some teams align on technology for some features", "Team-level definitions of required features", "Organizational inventory with technology alternatives and objectives", "Periodic analysis and SDLC promotion of feature usage"],
+              "refines": "Scope (Individual → Organizational); Knowledge (Aware → Mastered)",
+              "level_mapping": {"No classification exists": 0, "Some teams align on technology for some features": 1, "Team-level definitions of required features": 2, "Organizational inventory with technology alternatives and objectives": 3, "Periodic analysis and SDLC promotion of feature usage": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-TECH",
+          "capability_name": "Technical Solution",
+          "questions": [
+            {
+              "id": "CMD-TECH-01",
+              "practice_id": "PRA-CS-TECH-01",
+              "question": "Does your organization define and enforce the use of security-by-design components and services?",
+              "purpose": "Determines whether security-by-design is an explicit architectural concern with shared components.",
+              "response_type": "Single-choice",
+              "options": ["Not addressed", "Case-by-case approach", "Team-level internal definitions", "Organizational mandatory inventory enforced", "Periodic analysis with predictive behavior modeling"],
+              "refines": "Scope (Individual → Organizational); Approach (Reactive → Predictive)",
+              "level_mapping": {"Not addressed": 0, "Case-by-case approach": 1, "Team-level internal definitions": 2, "Organizational mandatory inventory enforced": 3, "Periodic analysis with predictive behavior modeling": 4}
+            },
+            {
+              "id": "CMD-TECH-02",
+              "practice_id": "PRA-CS-TECH-02",
+              "question": "Does your organization use Software Composition Analysis (SCA) tools to manage external component usage?",
+              "purpose": "Assesses the maturity of dependency and supply-chain security analysis.",
+              "response_type": "Single-choice",
+              "options": ["Composition not explicit", "External dependencies managed, no integrity check", "Team manages dependencies, no vulnerability analysis", "Organizational SCA rules and enforced tool usage", "SCA results used for predictive planning"],
+              "refines": "Management (Not Managed → Optimized); Knowledge (Aware → Mastered)",
+              "level_mapping": {"Composition not explicit": 0, "External dependencies managed, no integrity check": 1, "Team manages dependencies, no vulnerability analysis": 2, "Organizational SCA rules and enforced tool usage": 3, "SCA results used for predictive planning": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-STEST",
+          "capability_name": "Security Testing",
+          "questions": [
+            {
+              "id": "CMD-STEST-01",
+              "practice_id": "PRA-CS-STEST-01",
+              "question": "Does your organization have a defined security testing strategy?",
+              "purpose": "Determines the existence and scope of security verification practices.",
+              "response_type": "Single-choice",
+              "options": ["No security testing", "Testing without process or goals", "Team-defined strategy traced to requirements", "Organizational strategies shared across teams", "Automated mandatory security testing with analysis"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No security testing": 0, "Testing without process or goals": 1, "Team-defined strategy traced to requirements": 2, "Organizational strategies shared across teams": 3, "Automated mandatory security testing with analysis": 4}
+            },
+            {
+              "id": "CMD-STEST-02",
+              "practice_id": "PRA-CS-STEST-02",
+              "question": "What types of security tests are integrated into your development pipeline?",
+              "purpose": "Assesses the sophistication and automation level of security test suites.",
+              "response_type": "Single-choice",
+              "options": ["None", "Opaque-box techniques only", "Automated tests in pipeline", "Risk-driven tests with coverage analysis", "Adversarial and event-driven automated testing"],
+              "refines": "Approach (Reactive → Predictive); Knowledge (Aware → Mastered)",
+              "level_mapping": {"None": 0, "Opaque-box techniques only": 1, "Automated tests in pipeline": 2, "Risk-driven tests with coverage analysis": 3, "Adversarial and event-driven automated testing": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-PTEST",
+          "capability_name": "Penetration Testing",
+          "questions": [
+            {
+              "id": "CMD-PTEST-01",
+              "practice_id": "PRA-CS-PTEST-01",
+              "question": "Does your organization perform penetration testing, and if so, does it include external testers?",
+              "purpose": "Determines the existence and scope of penetration testing practices.",
+              "response_type": "Single-choice",
+              "options": ["No penetration testing", "Internal testers only", "External tests and tools used", "Mandatory organizational penetration testing program", "Customized suites with SDLC feedback"],
+              "refines": "Scope (Individual → Organizational); Approach (Reactive → Predictive)",
+              "level_mapping": {"No penetration testing": 0, "Internal testers only": 1, "External tests and tools used": 2, "Mandatory organizational penetration testing program": 3, "Customized suites with SDLC feedback": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-OPSEC",
+          "capability_name": "Operational Security",
+          "questions": [
+            {
+              "id": "CMD-OPSEC-01",
+              "practice_id": "PRA-CS-OPSEC-01",
+              "question": "How is your deployment environment secured?",
+              "purpose": "Determines the maturity of deployment configuration security.",
+              "response_type": "Single-choice",
+              "options": ["No control", "Basic host/network security", "Automated security configurations", "Organizational configurations enforced", "Application behavior monitoring with containers"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No control": 0, "Basic host/network security": 1, "Automated security configurations": 2, "Organizational configurations enforced": 3, "Application behavior monitoring with containers": 4}
+            },
+            {
+              "id": "CMD-OPSEC-02",
+              "practice_id": "PRA-CS-OPSEC-04",
+              "question": "What level of monitoring do you have over your deployed applications and infrastructure?",
+              "purpose": "Assesses the depth and sophistication of operational monitoring.",
+              "response_type": "Single-choice",
+              "options": ["No monitoring", "Basic CPU/memory metrics", "Application and infrastructure monitoring", "Application behavior monitoring", "Cloud/virtualized environment security monitoring"],
+              "refines": "Approach (Reactive → Predictive); Knowledge (Aware → Mastered)",
+              "level_mapping": {"No monitoring": 0, "Basic CPU/memory metrics": 1, "Application and infrastructure monitoring": 2, "Application behavior monitoring": 3, "Cloud/virtualized environment security monitoring": 4}
+            },
+            {
+              "id": "CMD-OPSEC-03",
+              "practice_id": "PRA-CS-OPSEC-05",
+              "question": "How does your organization register and manage security incidents detected in operational environments?",
+              "purpose": "Determines the maturity of incident registration, triage, and response.",
+              "response_type": "Single-choice",
+              "options": ["No register is made", "Registered as bugs and fixed", "Defined detection and treatment process", "Incident exchange with response team, bugs created", "Security incidents process periodically analyzed and improved"],
+              "refines": "Management (Not Managed → Optimized)",
+              "level_mapping": {"No register is made": 0, "Registered as bugs and fixed": 1, "Defined detection and treatment process": 2, "Incident exchange with response team, bugs created": 3, "Security incidents process periodically analyzed and improved": 4}
+            },
+            {
+              "id": "CMD-OPSEC-04",
+              "practice_id": "PRA-CS-OPSEC-06",
+              "question": "Does your organization have a dedicated security event response team?",
+              "purpose": "Assesses the existence and training level of a response team.",
+              "response_type": "Single-choice",
+              "options": ["No response team", "Ad-hoc response by available team members", "Trained individuals within the team", "Organizational response team with mandatory training", "Team periodically analyzes own performance for improvement"],
+              "refines": "Scope (Individual → Organizational); Knowledge (Aware → Mastered)",
+              "level_mapping": {"No response team": 0, "Ad-hoc response by available team members": 1, "Trained individuals within the team": 2, "Organizational response team with mandatory training": 3, "Team periodically analyzes own performance for improvement": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-CFGM",
+          "capability_name": "Configuration Management",
+          "questions": [
+            {
+              "id": "CMD-CFGM-01",
+              "practice_id": "PRA-CS-CFGM-01",
+              "question": "Does your organization maintain a software asset inventory?",
+              "purpose": "Determines the existence and scope of asset tracking, which is a prerequisite for integrity control and SBOM.",
+              "response_type": "Single-choice",
+              "options": ["No inventory", "External dependencies managed", "Team-level full asset inventory", "Organizational inventory with integrity testing", "Risk-analyzed inventory with predictive additions"],
+              "refines": "Management (Not Managed → Optimized); Scope (Individual → Organizational)",
+              "level_mapping": {"No inventory": 0, "External dependencies managed": 1, "Team-level full asset inventory": 2, "Organizational inventory with integrity testing": 3, "Risk-analyzed inventory with predictive additions": 4}
+            },
+            {
+              "id": "CMD-CFGM-02",
+              "practice_id": "PRA-CS-CFGM-04",
+              "question": "Does your organization produce a Software Bill of Materials (SBOM)?",
+              "purpose": "Assesses SBOM generation capability and its integration into organizational processes.",
+              "response_type": "Single-choice",
+              "options": ["No SBOM", "Dependencies managed but no SBOM", "Automated SBOM per product", "Organizational SBOM definition, majority of products covered", "SBOM processes periodically evaluated with SDLC feedback"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No SBOM": 0, "Dependencies managed but no SBOM": 1, "Automated SBOM per product": 2, "Organizational SBOM definition, majority of products covered": 3, "SBOM processes periodically evaluated with SDLC feedback": 4}
+            },
+            {
+              "id": "CMD-CFGM-03",
+              "practice_id": "PRA-CS-CFGM-07",
+              "question": "How does your organization manage source code repositories?",
+              "purpose": "Determines the maturity of version control and branching strategy.",
+              "response_type": "Single-choice",
+              "options": ["No repository", "Internal code in repository", "Repository with branching strategy", "Organizational rules, centralized branching, metrics", "Periodic consistency analysis and process evolution"],
+              "refines": "Management (Not Managed → Optimized); Scope (Individual → Organizational)",
+              "level_mapping": {"No repository": 0, "Internal code in repository": 1, "Repository with branching strategy": 2, "Organizational rules, centralized branching, metrics": 3, "Periodic consistency analysis and process evolution": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-CI",
+          "capability_name": "Continuous Integration",
+          "questions": [
+            {
+              "id": "CMD-CI-01",
+              "practice_id": "PRA-CS-CI-01",
+              "question": "Does your organization have continuous integration capability?",
+              "purpose": "Assesses the existence and automation level of CI.",
+              "response_type": "Single-choice",
+              "options": ["No CI", "CI exists, manually triggered", "Automated CI with goal-oriented orchestration", "Organizational CI with quality-metric control gates", "CI periodically evaluated for business impact"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No CI": 0, "CI exists, manually triggered": 1, "Automated CI with goal-oriented orchestration": 2, "Organizational CI with quality-metric control gates": 3, "CI periodically evaluated for business impact": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-QADSO",
+          "capability_name": "Quality Assurance (DevSecOps)",
+          "questions": [
+            {
+              "id": "CMD-QADSO-01",
+              "practice_id": "PRA-CS-QADSO-01",
+              "question": "Does your organization use static analysis tools?",
+              "purpose": "Determines the maturity of SAST tool integration.",
+              "response_type": "Single-choice",
+              "options": ["No tools used", "Ad-hoc individual usage", "Team-defined rules for tool usage", "Organizational pipeline integration with automation", "Output periodically analyzed for improvement"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No tools used": 0, "Ad-hoc individual usage": 1, "Team-defined rules for tool usage": 2, "Organizational pipeline integration with automation": 3, "Output periodically analyzed for improvement": 4}
+            },
+            {
+              "id": "CMD-QADSO-02",
+              "practice_id": "PRA-CS-QADSO-05",
+              "question": "Does your organization have a global testing strategy with defined goals and metrics?",
+              "purpose": "Assesses the overall testing strategy maturity.",
+              "response_type": "Single-choice",
+              "options": ["No strategy", "Individual contributors decide coverage", "Team strategy with goals and manually collected metrics", "Organizational strategy with quality metrics enforced", "Strategy periodically reviewed for SDLC improvement"],
+              "refines": "Management (Not Managed → Optimized); Scope (Individual → Organizational)",
+              "level_mapping": {"No strategy": 0, "Individual contributors decide coverage": 1, "Team strategy with goals and manually collected metrics": 2, "Organizational strategy with quality metrics enforced": 3, "Strategy periodically reviewed for SDLC improvement": 4}
+            }
+          ]
+        },
+        {
+          "capability_id": "CAP-CS-CD",
+          "capability_name": "Continuous Delivery",
+          "questions": [
+            {
+              "id": "CMD-CD-01",
+              "practice_id": "PRA-CS-CD-01",
+              "question": "Does your organization have a process to restore a product to a known stable state when a failure occurs?",
+              "purpose": "Determines the resilience and recovery capability.",
+              "response_type": "Single-choice",
+              "options": ["No restore procedure", "Manual restore by specific people, probable data loss", "Manual restore, no specific team member needed", "Automated restore with data loss prevention", "Automated restore periodically reviewed with SDLC feedback"],
+              "refines": "Management (Not Managed → Optimized); Approach (Reactive → Predictive)",
+              "level_mapping": {"No restore procedure": 0, "Manual restore by specific people, probable data loss": 1, "Manual restore, no specific team member needed": 2, "Automated restore with data loss prevention": 3, "Automated restore periodically reviewed with SDLC feedback": 4}
+            }
+          ]
+        }
+      ]
+    },
+    "tier_3_clarification_and_conflict_resolution": {
+      "description": "Meta-questions invoked dynamically when the SLM detects inconsistencies between answers within or across capabilities. These questions resolve dependency violations, dimension contradictions, and logical impossibilities before the system commits to a maturity level assignment. If the user cannot resolve the inconsistency, the system conservatively infers the lower maturity level.",
+      "conflict_patterns": [
+        {
+          "id": "CLR-01",
+          "trigger": "PRA-CS-GOV-03 assessed at Level 3+ but PRA-CS-GOV-01 assessed at Level 0-1",
+          "dependency": "PRA-CS-GOV-01 requires PRA-CS-GOV-03",
+          "clarification_question": "You indicated that your organization defines mandatory security practices for the SDLC, but no formal security policy seems to exist. Could you clarify whether the security strategy is built on implicit working agreements rather than a documented policy?",
+          "fallback_rule": "If unanswered, lower PRA-CS-GOV-03 to match PRA-CS-GOV-01 level."
+        },
+        {
+          "id": "CLR-02",
+          "trigger": "PRA-CS-GOV-06 assessed at Level 3+ but PRA-CS-GOV-03 assessed at Level 0-1",
+          "dependency": "PRA-CS-GOV-03 requires PRA-CS-GOV-06",
+          "clarification_question": "You mentioned an organizational metrics catalog, but no security strategy appears to be defined. Are the metrics anchored to an implicit strategy, or are they collected without strategic alignment?",
+          "fallback_rule": "If unanswered, lower PRA-CS-GOV-06 to Level 2 (team-defined metrics without strategic grounding)."
+        },
+        {
+          "id": "CLR-03",
+          "trigger": "PRA-CS-RISK-02 assessed at Level 3+ but PRA-CS-RISK-01 assessed at Level 0-1",
+          "dependency": "PRA-CS-RISK-01 requires PRA-CS-RISK-02",
+          "clarification_question": "You mentioned a formal security write-off for releasing software, but no risk evaluation framework appears to exist. Is the write-off based on a formal risk assessment process, or on subjective judgment?",
+          "fallback_rule": "If unanswered, lower PRA-CS-RISK-02 to Level 1."
+        },
+        {
+          "id": "CLR-04",
+          "trigger": "PRA-CS-STEST-02 assessed at Level 2+ but PRA-CS-STEST-01 assessed at Level 0-1",
+          "dependency": "PRA-CS-STEST-01 requires PRA-CS-STEST-02",
+          "clarification_question": "You indicated that security tests are automated in the pipeline, but no security testing strategy seems to be defined. Are the automated tests part of an implicit strategy, or were they added opportunistically?",
+          "fallback_rule": "If unanswered, lower PRA-CS-STEST-02 to Level 1."
+        },
+        {
+          "id": "CLR-05",
+          "trigger": "PRA-CS-OPSEC-05 assessed at Level 2+ but PRA-CS-OPSEC-04 assessed at Level 0",
+          "dependency": "PRA-CS-OPSEC-04 requires PRA-CS-OPSEC-05",
+          "clarification_question": "You indicated that security issues are detected and treated through a defined process, but no monitoring capability exists. How are security problems being detected without monitoring?",
+          "fallback_rule": "If unanswered, lower PRA-CS-OPSEC-05 to Level 0."
+        },
+        {
+          "id": "CLR-06",
+          "trigger": "PRA-CS-OPSEC-07 assessed at Level 2+ but PRA-CS-OPSEC-06 assessed at Level 0-1",
+          "dependency": "PRA-CS-OPSEC-06 requires PRA-CS-OPSEC-07",
+          "clarification_question": "You described a team-defined response process, but no dedicated response team or trained individuals appear to exist. Are response procedures followed by general development staff, or is there informal role assignment?",
+          "fallback_rule": "If unanswered, lower PRA-CS-OPSEC-07 to Level 1 (ad-hoc process)."
+        },
+        {
+          "id": "CLR-07",
+          "trigger": "PRA-CS-TECH-01 assessed at Level 2+ but PRA-CS-REQ-02 assessed at Level 0-1",
+          "dependency": "PRA-CS-REQ-02 requires PRA-CS-TECH-01",
+          "clarification_question": "You mentioned that your teams have internal definitions for implementing security requirements, but no classification of security features appears to exist. Are teams defining their own security features independently?",
+          "fallback_rule": "If confirmed (teams define independently), accept Level 2 for PRA-CS-TECH-01 but flag lack of consistency. If unanswered, lower to Level 1."
+        },
+        {
+          "id": "CLR-08",
+          "trigger": "PRA-CS-CFGM-04 assessed at Level 2+ but PRA-CS-CFGM-01 assessed at Level 0",
+          "dependency": "PRA-CS-CFGM-01 requires PRA-CS-CFGM-04",
+          "clarification_question": "You indicated that an SBOM is produced automatically, but no software asset inventory exists. Is the SBOM generated from build tooling without an underlying asset catalog?",
+          "fallback_rule": "If confirmed (tooling-based SBOM), accept Level 2 but note the gap. If unanswered, lower PRA-CS-CFGM-04 to Level 1."
+        },
+        {
+          "id": "CLR-09",
+          "trigger": "OCM-05 = 'Undefined' but any practice assessed at Level 3+ with Scope = Organizational",
+          "dependency": "Cross-cutting: SDLC formality bounds organizational scope",
+          "clarification_question": "You described your SDLC as undefined, but some practices appear to operate at an organizational level. Are there informal organizational agreements that serve as a de facto SDLC definition?",
+          "fallback_rule": "If confirmed, upgrade OCM-05 to Basic. If unanswered, cap all practices at Level 2 (Team scope maximum)."
+        },
+        {
+          "id": "CLR-10",
+          "trigger": "OCM-10 = 'Minimal awareness' but any practice assessed at Level 3+ with Knowledge = Proficient or Mastered",
+          "dependency": "Cross-cutting: Knowledge baseline bounds knowledge dimension",
+          "clarification_question": "You rated your teams' cybersecurity knowledge as minimal, but some practices appear to operate at a proficient or mastered level. Is there a subset of specialized team members driving these practices?",
+          "fallback_rule": "If confirmed (specialized subset), accept practice levels but flag Knowledge dimension inconsistency for improvement planning. If unanswered, lower to Level 1."
+        },
+        {
+          "id": "CLR-11",
+          "trigger": "PRA-CS-CI-01 assessed at Level 3+ but PRA-CS-CI-02 assessed at Level 0-1",
+          "dependency": "PRA-CS-CI-02 requires PRA-CS-CI-01",
+          "clarification_question": "You indicated organizational CI capability with quality control gates, but the build process appears to be manual or not defined. Is the CI orchestrating a process that is automated at the tooling level but not formally documented?",
+          "fallback_rule": "If unanswered, lower PRA-CS-CI-01 to Level 2."
+        },
+        {
+          "id": "CLR-12",
+          "trigger": "PRA-CS-RISK-05 assessed at Level 2+ but PRA-CS-RISK-04 assessed at Level 0-1",
+          "dependency": "PRA-CS-RISK-04 requires PRA-CS-RISK-05",
+          "clarification_question": "You described per-project threat assessments, but the organization does not appear to systematically identify vulnerabilities or attackers. Are threat assessments being performed without a prior vulnerability identification process?",
+          "fallback_rule": "If unanswered, lower PRA-CS-RISK-05 to Level 1."
+        }
+      ]
+    }
+  }
+}
